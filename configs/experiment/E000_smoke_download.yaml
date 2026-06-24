@@ -1,0 +1,12 @@
+experiment_id: E000_smoke_download
+stage: data_access
+description: Verify Kaggle dataset access and raw JSONL readability.
+data:
+  source: kaggle:otto/recsys-dataset
+  sample_file: otto-recsys-test.jsonl
+output:
+  raw_dir: data/raw
+checks:
+  - archive_downloaded
+  - jsonl_member_readable
+  - first_session_parseable

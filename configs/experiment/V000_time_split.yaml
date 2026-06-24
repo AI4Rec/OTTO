@@ -1,0 +1,15 @@
+experiment_id: V000_time_split
+stage: validation
+description: Chronological validation split for local weighted Recall@20.
+data:
+  dataset_id: D000_kaggle_official_raw
+inputs:
+  train_events: data/parquet/train_events.parquet
+split:
+  strategy: chronological
+  valid_window: final_week
+  min_session_events: 2
+outputs:
+  valid_input: data/splits/V000_time_split/valid_input.parquet
+  valid_labels: data/splits/V000_time_split/valid_labels.parquet
+  report: reports/validation/V000_time_split.md

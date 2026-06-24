@@ -1,0 +1,36 @@
+# Local environments
+.DS_Store
+.venv/
+.venv-*/
+venv/
+sys/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local data and large artifacts
+data/raw/*
+data/parquet/*
+data/work/*
+outputs/
+runs/
+logs/
+.mkdocs_site/
+checkpoints/
+models/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+
+# Keep source-side documentation placeholders if added later.
+!data/raw/.gitkeep
+!data/parquet/.gitkeep
+
+# Secrets
+.env
+*.token
+kaggle.json
+access_token

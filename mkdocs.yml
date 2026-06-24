@@ -1,0 +1,69 @@
+site_name: OTTO Recommender System Study
+site_description: A reproducible recommender-system study of the Kaggle OTTO competition.
+site_url: https://ai4rec.github.io/OTTO/
+repo_url: https://github.com/AI4Rec/OTTO
+repo_name: AI4Rec/OTTO
+docs_dir: site
+site_dir: .mkdocs_site
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+
+nav:
+  - Overview: index.md
+  - Task & Metric: task_metric.md
+  - Data & EDA: data_eda.md
+  - Validation: validation.md
+  - Methods: methods.md
+  - Experiments: experiments.md
+  - Engineering: engineering.md
+  - Project Story: project_story.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/AI4Rec/OTTO
+
+copyright: "Copyright &copy; 2026 AI4Rec"

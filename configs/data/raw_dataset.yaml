@@ -1,0 +1,12 @@
+dataset_id: D000_kaggle_official_raw
+source: kaggle:otto/recsys-dataset
+raw_dir: data/raw
+archive_name: recsys-dataset.zip
+train_member: otto-recsys-train.jsonl
+test_member: otto-recsys-test.jsonl
+event_schema:
+  session: int64
+  aid: int64
+  ts: int64
+  type: string
+  event_idx: int32

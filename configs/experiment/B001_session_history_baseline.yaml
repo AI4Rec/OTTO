@@ -1,0 +1,20 @@
+experiment_id: B001_session_history_baseline
+stage: baseline
+description: Recent unique session-history baseline with popularity fallback.
+data:
+  dataset_id: D000_kaggle_official_raw
+  split_id: V000_time_split
+inputs:
+  valid_input: data/splits/V000_time_split/valid_input.parquet
+  valid_labels: data/splits/V000_time_split/valid_labels.parquet
+method:
+  top_k: 20
+  use_recent_unique_items: true
+  fallback: type_specific_popularity
+metrics:
+  - clicks_recall20
+  - carts_recall20
+  - orders_recall20
+  - weighted_recall20
+outputs:
+  run_dir: outputs/experiments/B001_session_history_baseline
