@@ -30,6 +30,12 @@ Raw session events
 | Session history | Recommend recently interacted items | Strong continuation signal |
 | Weighted session history | Weight recency and event type | Improves order-sensitive ranking |
 
+EDA-driven additions:
+
+- Use separate fallback lists for `clicks`, `carts`, and `orders`; top items differ by target.
+- Segment metrics by session length because the test split is much shorter than train.
+- Add a stronger order path based on late-session events and cart-to-order transitions.
+
 ## Candidate Generation
 
 Candidate generation should be evaluated by target-level recall coverage before ranking.
@@ -41,6 +47,15 @@ Candidate generation should be evaluated by target-level recall coverage before 
 | Click-click co-visitation | Items viewed together | Click target recall |
 | Cart/order co-visitation | Items carted or ordered together | Cart/order target recall |
 | Mixed target pool | Different source mix by target | Weighted recall contribution |
+
+EDA points to these first co-visitation matrices:
+
+| Matrix | Motivation | Target |
+| :-- | :-- | :-- |
+| click -> click | Most transitions are click continuation | clicks |
+| click -> cart | 8-9% of click transitions move into cart | carts |
+| cart -> order | Roughly 9-10% of cart transitions move into order | orders |
+| order -> order | Orders often repeat after orders | orders |
 
 ## Ranking Layer
 
@@ -55,6 +70,17 @@ Feature groups:
 | Session-item features | Last seen position, count in session, max event type weight |
 | Candidate-source features | Source id, source rank, number of sources |
 | Time features | Recency, time gap, window-specific counts |
+
+EDA-backed high-priority features:
+
+| Feature | Reason |
+| :-- | :-- |
+| `session_len`, `unique_aid_count` | Test sessions are short and need different fallback behavior. |
+| `aid_count_in_session` | Repeated-aid sessions are common. |
+| `last_seen_rank`, `relative_position` | Orders are concentrated near the session tail. |
+| `last_event_type` | Last cart/order is an intent signal. |
+| `target_popularity_rank` | Popular items differ by target. |
+| `source_count`, `best_source_rank` | Candidate-source agreement can improve reranking. |
 
 ## Ablation Strategy
 

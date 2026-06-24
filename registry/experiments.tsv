@@ -1,5 +1,6 @@
 experiment_id	stage	status	config_path	card_path	output	best_metric	created_at	notes
 E000_smoke_download	data_access	succeeded	configs/experiment/E000_smoke_download.yaml	experiments/E000_smoke_download.md	data/raw	download_ok	2026-06-24	Kaggle sample file download and parse check succeeded.
+A000_full_eda	analysis	succeeded		reports/analysis/A000_initial_eda.zh.md	reports/eda	full_eda_artifacts	2026-06-25	Full train/test EDA summary, CSV tables, SVG figures, and Pages report.
 V000_time_split	validation	planned	configs/experiment/V000_time_split.yaml	reports/validation/V000_time_split.md	data/splits/V000_time_split		2026-06-25	Chronological validation split.
 B000_popularity_baseline	baseline	planned	configs/experiment/B000_popularity_baseline.yaml	experiments/B000_popularity_baseline.md	outputs/experiments/B000_popularity_baseline		2026-06-25	Global and target-specific popularity baseline.
 B001_session_history_baseline	baseline	planned	configs/experiment/B001_session_history_baseline.yaml	experiments/B001_session_history_baseline.md	outputs/experiments/B001_session_history_baseline		2026-06-25	Recent unique session-history baseline with popularity fallback.

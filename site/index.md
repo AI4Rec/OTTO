@@ -11,17 +11,18 @@ The first EDA pass shows:
 | Finding | Evidence | Modeling consequence |
 | :-- | :-- | :-- |
 | Train/test share the same nested session schema | `session -> events[] -> aid, ts, type` | A single event-level interface can support EDA, validation, and features. |
-| Test sessions are much shorter in the sampled data | Train sample avg length 52.28; test sample avg length 9.69 | Fallback strategies and recent-item signals matter. |
-| Clicks dominate frequency, orders dominate metric weight | Train sample clicks 91.25%, orders 1.78%; metric order weight 0.60 | Use target-specific candidate and ranking strategies. |
-| Train and test are time-contiguous | Test sample starts immediately after train sample window | Use time-based validation, not random split. |
-| Repeated items are common | 83.08% of sampled train sessions repeat at least one item | Session history should be a baseline candidate source. |
+| Test sessions are much shorter | Full train mean length 16.80; full test mean length 8.29 | Fallback strategies and short-session paths matter. |
+| Clicks dominate frequency, orders dominate metric weight | Full train clicks 89.85%, orders 2.35%; metric order weight 0.60 | Use target-specific candidate and ranking strategies. |
+| Train and test are time-contiguous | Test starts immediately after train | Use time-based validation, not random split. |
+| Repeated items are common | 69.20% of train sessions and 63.61% of test sessions repeat an item | Session history should be a baseline candidate source. |
+| Orders concentrate late in sessions | 54.66% of train orders and 73.75% of test orders occur in the final 30% of a session | Add recency and relative-position features for order ranking. |
 
 ## Project Roadmap
 
 | Stage | Goal | Status | Public artifact |
 | :-- | :-- | :--: | :-- |
 | Task framing | Define objective, metric, and constraints | done | [Task & Metric](task_metric.md) |
-| Data & EDA | Build schema contract, distributions, insights | draft | [Data & EDA](data_eda.md) |
+| Data & EDA | Build schema contract, full distributions, figures, insights | done | [Data & EDA](data_eda.md) |
 | Validation | Create local time split and labels | next | [Validation](validation.md) |
 | Baseline | Implement popularity and session-history recommenders | next | [Experiments](experiments.md) |
 | Candidate generation | Add co-visitation and target-specific candidates | planned | [Methods](methods.md) |

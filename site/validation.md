@@ -14,6 +14,13 @@ raw train sessions
   -> evaluate top-20 predictions for clicks/carts/orders
 ```
 
+EDA motivation:
+
+- Train and test are chronological neighbors.
+- Full train covers 2022-07-31 to 2022-08-28; test covers 2022-08-28 to 2022-09-04.
+- Top popularity drifts across the boundary: train/test top100 item Jaccard is 0.3072.
+- Random splitting would mix popularity regimes and overstate generalization.
+
 ## Validation Artifacts
 
 | Artifact | Description | Status |
@@ -47,3 +54,13 @@ Final score:
 | Test labels assumed | Never derive labels from the public test split. |
 | Duplicate predictions | Deduplicate candidates before metric computation. |
 | Target leakage across types | Evaluate clicks, carts, and orders separately. |
+
+## Required Diagnostics
+
+| Diagnostic | Why it matters |
+| :-- | :-- |
+| Metric sanity examples | Prevents silent weighted Recall@20 implementation errors. |
+| Score by session length bucket | Test is much shorter than train. |
+| Score by target | Orders dominate the metric but are sparse. |
+| Candidate recall before ranking | Separates retrieval bottlenecks from ranking bottlenecks. |
+| Recent vs global popularity comparison | Popular items drift over time. |

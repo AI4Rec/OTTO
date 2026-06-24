@@ -7,6 +7,7 @@ The experiment board tracks hypotheses, design choices, metrics, and decisions. 
 | ID | Stage | Hypothesis | Primary metric | Status | Decision |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | E000_smoke_download | Data access | Kaggle source can be downloaded and inspected through the standard data directory | download_ok | succeeded | keep as environment check |
+| A000_full_eda | Analysis | Full-dataset distributions expose validation, candidate, and feature priorities | EDA artifacts | succeeded | use insights to drive `V000`, `B000`, `B001`, `C000` |
 | V000_time_split | Validation | A chronological split better simulates test prediction than random splitting | metric_sanity | planned | pending |
 | B000_popularity_baseline | Baseline | Global and type-specific popularity provide a robust fallback | weighted_recall@20 | planned | pending |
 | B001_session_history_baseline | Baseline | Recent session items are strong candidates for all targets | weighted_recall@20 | planned | pending |
