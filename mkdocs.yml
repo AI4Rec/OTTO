@@ -59,6 +59,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js
   - assets/javascripts/ui_theme.js
   - assets/javascripts/otto_search.js
+  - assets/javascripts/home_dashboard.js
   - assets/javascripts/eda_charts.js
 
 extra:
