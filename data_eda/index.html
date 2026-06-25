@@ -1270,7 +1270,7 @@
 <h2 id="session">Session 长度<a class="headerlink" href="#session" title="Permanent link">&para;</a></h2>
 <div class="eda-chart" data-eda-chart="length"></div>
 
-<p class="eda-chart-note">交互：hover 查看 session 数；拖动底部滑块缩放长度桶；右上角可还原或保存图片。静态备份图：<a href="assets/figures/eda_session_length_hist.svg">Session 长度分布 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：test session 明显更短，短上下文推荐不是边缘场景，而是主场景。</p>
 
 <table>
 <thead>
@@ -1351,7 +1351,7 @@
 <h2 id="_6">行为类型分布<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <div class="eda-chart" data-eda-chart="type-mix"></div>
 
-<p class="eda-chart-note">交互：hover 查看绝对事件量和占比；点击 legend 可开关 clicks/carts/orders。静态备份图：<a href="assets/figures/eda_event_type_mix.svg">行为类型分布 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：clicks 提供大多数训练信号，orders 决定更大指标收益，两者需要分目标建模。</p>
 
 <table>
 <thead>
@@ -1395,7 +1395,7 @@
 <h2 id="session_2">Session 级信号<a class="headerlink" href="#session_2" title="Permanent link">&para;</a></h2>
 <div class="eda-chart" data-eda-chart="signals"></div>
 
-<p class="eda-chart-note">交互：hover 查看每类 session 信号占比；点击 legend 对比 train/test。静态备份图：<a href="assets/figures/eda_session_signals.svg">Session 级信号 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：重复 item 与 cart/order presence 足够常见，应直接进入 session intent 和 session-item 特征。</p>
 
 <table>
 <thead>
@@ -1476,7 +1476,7 @@
 <h2 id="_8">时间结构<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <div class="eda-chart eda-chart--wide" data-eda-chart="daily"></div>
 
-<p class="eda-chart-note">交互：hover 查看日期、星期、三类行为量和 order ratio；拖动底部滑块查看局部时间段。静态备份图：<a href="assets/figures/eda_daily_event_volume.svg">每日事件量 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：train/test 是连续时间窗口，验证集必须模拟未来预测，不能随机切分。</p>
 
 <p>train 与 test 是时间相邻窗口。这意味着随机验证不合适：它会泄漏未来热度，并高估模型泛化能力。本地验证应使用最近时间窗口，并把未来事件作为 label。</p>
 <h3 id="_9">时间戳与时区解释<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
@@ -1578,7 +1578,7 @@
 </table>
 <div class="eda-chart" data-eda-chart="weekday"></div>
 
-<p class="eda-chart-note">交互：柱形表示平均日事件量，折线表示 cart/order ratio，用于区分流量高峰和成交强度。</p>
+<p class="eda-chart-takeaway">结论：流量高峰和成交强度不同步，recent popularity 应考虑周内节律。</p>
 
 <p>初步 insight：</p>
 <ul>
@@ -1596,7 +1596,7 @@
 <h2 id="item-popularity">Item Popularity 与长尾<a class="headerlink" href="#item-popularity" title="Permanent link">&para;</a></h2>
 <div class="eda-chart eda-chart--wide" data-eda-chart="popularity"></div>
 
-<p class="eda-chart-note">交互：log-log 坐标下 hover 查看 rank 与 event count；支持缩放长尾区间。静态备份图：<a href="assets/figures/eda_item_popularity_loglog.svg">Item popularity 长尾 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：item 热度极度长尾，热门兜底必要但覆盖不了个性化和尾部需求。</p>
 
 <table>
 <thead>
@@ -1707,11 +1707,11 @@
 <h2 id="_11">序列行为<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <div class="eda-chart" data-eda-chart="transition"></div>
 
-<p class="eda-chart-note">交互：hover 查看 from -> to 的转移次数和条件概率。静态备份图：<a href="assets/figures/eda_type_transition_heatmap.svg">行为类型转移 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：cart -> order 的转移概率远高于 click -> order，order 召回应优先利用 cart 先导信号。</p>
 
 <div class="eda-chart" data-eda-chart="position"></div>
 
-<p class="eda-chart-note">交互：hover 查看每类行为在 session 相对位置分桶中的占比。静态备份图：<a href="assets/figures/eda_type_position_deciles.svg">行为类型相对位置 SVG</a>。</p>
+<p class="eda-chart-takeaway">结论：orders 更集中在 session 后段，排序特征需要显式表达 recency 和 relative position。</p>
 
 <h3 id="_12">行为类型条件转移<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <table>
