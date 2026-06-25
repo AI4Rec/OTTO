@@ -702,7 +702,7 @@
 <h2 id="_2">目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>本地验证要模拟比赛设定：给定 session 前缀，预测未来的 <code>clicks</code>、<code>carts</code>、<code>orders</code>。OTTO 具有明显时间结构，train/test 又是前后相邻的时间窗口，因此随机切分不适合作为主验证方案。</p>
 <h2 id="_3">切分方案<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>raw train sessions
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>原始训练会话
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; 按时间排序或筛选
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  -&gt; 选择最近一段作为 validation window
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  -&gt; 将每个 session 切成 input prefix 与 future labels
@@ -904,6 +904,8 @@
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+      
+        <script src="../assets/javascripts/ui_theme.js"></script>
       
         <script src="../assets/javascripts/eda_charts.js"></script>
       
