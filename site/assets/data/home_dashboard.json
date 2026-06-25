@@ -28,6 +28,38 @@
       }
     ]
   },
+  "external_benchmarks": [
+    {
+      "id": "rules_only_reference",
+      "label": "3rd Place Rules-only",
+      "short_label": "3rd · Rules-only",
+      "score": 0.59,
+      "group": "reference_line",
+      "note": "只用规则与 co-visitation 也能打到 0.590。",
+      "source_label": "Kaggle discussion 383013",
+      "href": "https://www.kaggle.com/competitions/otto-recommender-system/discussion/383013"
+    },
+    {
+      "id": "single_ranker_reference",
+      "label": "1st Place Single Ranker",
+      "short_label": "1st · Single Ranker",
+      "score": 0.604,
+      "group": "highscore_band",
+      "note": "单个 LGBMRanker 已到 0.604。",
+      "source_label": "Kaggle discussion 384022",
+      "href": "https://www.kaggle.com/competitions/otto-recommender-system/discussion/384022"
+    },
+    {
+      "id": "ensemble_ceiling",
+      "label": "1st Place Ensemble",
+      "short_label": "1st · Ensemble Ceiling",
+      "score": 0.605,
+      "group": "highscore_band",
+      "note": "9 rankers 集成公开高位约 0.605。",
+      "source_label": "Kaggle discussion 384022",
+      "href": "https://www.kaggle.com/competitions/otto-recommender-system/discussion/384022"
+    }
+  ],
   "experiment_history": [
     {
       "run_id": "V000",
@@ -158,6 +190,7 @@
   "judgements": [
     "本项目唯一 KPI 是 weighted Recall@20，任何实验都必须回收到这一指标。",
     "orders 权重占 0.60，候选召回和排序策略都必须显式向高意图行为倾斜。",
+    "开源公开强基线大致落在 0.590 到 0.605 区间，我们的实验盘需要尽快进入可对比状态。",
     "当前主要缺口不是模型复杂度，而是首批正式可比 run 尚未回填。"
   ],
   "next_actions": [

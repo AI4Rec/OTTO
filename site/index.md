@@ -81,8 +81,9 @@
           </div>
           <a class="exec-card__link" href="experiments/">实验记录</a>
         </div>
-        <p class="exec-card__meta">记录口径固定为 <code>clicks@20</code>、<code>carts@20</code>、<code>orders@20</code>、<code>weighted@20</code>、<code>delta_vs_prev</code>。</p>
+        <p class="exec-card__meta">x 轴只记录内部正式 run；开源高分方案只作为 y 轴参照线/参照带。内部记录口径固定为 <code>clicks@20</code>、<code>carts@20</code>、<code>orders@20</code>、<code>weighted@20</code>、<code>delta_vs_prev</code>。</p>
         <div class="home-board-chart home-board-chart--trend" data-home-chart="experiment-trend"></div>
+        <div class="exec-benchmark-strip" data-home-block="benchmarks"></div>
         <p class="exec-card__foot">正式 run 按 <code>V000</code> → <code>B000</code> → <code>B001</code> → <code>C000</code> 顺序进板。</p>
       </article>
     </section>
