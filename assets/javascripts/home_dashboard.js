@@ -15,6 +15,9 @@
     running: "#2563eb",
     done: "#0f766e",
     blocked: "#b91c1c",
+    benchmarkLine: "#a16207",
+    benchmarkBand: "#1d4ed8",
+    internalWeighted: "#1d4ed8",
   };
 
   function loadData() {
@@ -52,6 +55,10 @@
 
   function fmtScore(value) {
     return value == null ? "待回填" : Number(value).toFixed(5);
+  }
+
+  function fmtBenchmark(value) {
+    return value == null ? "-" : Number(value).toFixed(3);
   }
 
   function hydrateSummary(data) {
@@ -127,6 +134,21 @@
     element.innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
   }
 
+  function renderBenchmarks(data) {
+    const element = document.querySelector('[data-home-block="benchmarks"]');
+    if (!element || !Array.isArray(data.external_benchmarks)) return;
+    element.innerHTML = data.external_benchmarks
+      .map(
+        (item) =>
+          `<a class="exec-benchmark-pill exec-benchmark-pill--${escapeHtml(item.group)}" href="${escapeHtml(item.href)}" target="_blank" rel="noopener">` +
+          `<span>${escapeHtml(item.short_label)}</span>` +
+          `<strong>${escapeHtml(fmtBenchmark(item.score))}</strong>` +
+          `<small>${escapeHtml(item.note)}</small>` +
+          `</a>`,
+      )
+      .join("");
+  }
+
   function baseChartOptions() {
     return {
       animationDuration: 450,
@@ -185,21 +207,121 @@
     };
   }
 
+  function getTrendRange(data, internalScores) {
+    const benchmarkScores = (data.external_benchmarks || [])
+      .map((item) => item.score)
+      .filter((value) => value != null);
+    const ownScores = (internalScores || []).filter((value) => value != null);
+    const allScores = [...benchmarkScores, ...ownScores];
+
+    if (!allScores.length) {
+      return { min: 0, max: 1 };
+    }
+
+    const minScore = Math.min(...allScores);
+    const maxScore = Math.max(...allScores);
+    const padding = Math.max(0.0025, (maxScore - minScore || 0.01) * 0.18);
+    return {
+      min: Number((minScore - padding).toFixed(4)),
+      max: Number((maxScore + padding).toFixed(4)),
+    };
+  }
+
+  function buildBenchmarkOverlay(data) {
+    const benchmarks = data.external_benchmarks || [];
+    const bandItems = benchmarks.filter((item) => item.group === "highscore_band");
+    const referenceItems = benchmarks.filter((item) => item.group !== "highscore_band");
+
+    const markLineData = referenceItems.map((item) => ({
+      name: item.short_label,
+      yAxis: item.score,
+      lineStyle: {
+        color: colors.benchmarkLine,
+        type: "dashed",
+        width: 1.6,
+      },
+      label: {
+        formatter: `${item.short_label} ${fmtBenchmark(item.score)}`,
+        position: "insideStartTop",
+        color: colors.benchmarkLine,
+        backgroundColor: "rgba(255, 247, 237, 0.96)",
+        borderRadius: 6,
+        padding: [4, 6],
+      },
+    }));
+
+    let markArea = undefined;
+
+    if (bandItems.length) {
+      const bandScores = bandItems.map((item) => item.score);
+      const bandMin = Math.min(...bandScores);
+      const bandMax = Math.max(...bandScores);
+
+      markArea = {
+        silent: true,
+        itemStyle: {
+          color: "rgba(29, 78, 216, 0.06)",
+        },
+        label: {
+          show: true,
+          color: colors.benchmarkBand,
+          fontWeight: 700,
+          formatter: `开源高分带 ${fmtBenchmark(bandMin)} - ${fmtBenchmark(bandMax)}`,
+        },
+        data: [[{ yAxis: bandMin }, { yAxis: bandMax }]],
+      };
+
+      markLineData.push({
+        name: "Open-source ceiling",
+        yAxis: bandMax,
+        lineStyle: {
+          color: colors.benchmarkBand,
+          width: 1.8,
+        },
+        label: {
+          formatter: `天花板 ${fmtBenchmark(bandMax)}`,
+          position: "insideStartTop",
+          color: colors.benchmarkBand,
+          backgroundColor: "rgba(239, 246, 255, 0.98)",
+          borderRadius: 6,
+          padding: [4, 6],
+        },
+      });
+    }
+
+    return {
+      markArea,
+      markLine: {
+        silent: true,
+        symbol: "none",
+        lineStyle: {
+          cap: "round",
+        },
+        data: markLineData,
+      },
+    };
+  }
+
   function emptyTrendOptions(data) {
+    const categories = data.experiment_history.map((item) => item.run_id);
+    const range = getTrendRange(data, []);
+    const overlay = buildBenchmarkOverlay(data);
+
     return {
       ...baseChartOptions(),
-      grid: { left: 32, right: 20, top: 32, bottom: 44 },
+      grid: { left: 54, right: 26, top: 28, bottom: 40 },
       xAxis: {
         type: "category",
-        data: data.experiment_history.map((item) => item.run_id),
+        data: categories,
         axisLine: { lineStyle: { color: "rgba(15, 23, 42, 0.16)" } },
         axisTick: { show: false },
       },
       yAxis: {
         type: "value",
-        min: 0,
-        max: 1,
-        show: false,
+        min: range.min,
+        max: range.max,
+        axisLabel: { formatter: (value) => Number(value).toFixed(3) },
+        splitLine: { lineStyle: { color: "rgba(15, 23, 42, 0.08)" } },
       },
       tooltip: {
         trigger: "item",
@@ -210,35 +332,38 @@
       },
       series: [
         {
-          type: "scatter",
-          symbolSize: 18,
-          data: data.experiment_history.map((item) => 0.5),
-          itemStyle: {
-            color: (params) => colors[data.experiment_history[params.dataIndex].status] || colors.planned,
-          },
+          name: "internal_weighted",
+          type: "line",
+          data: categories.map(() => range.min),
+          symbol: "none",
+          lineStyle: { opacity: 0 },
+          areaStyle: { opacity: 0 },
+          emphasis: { disabled: true },
+          markArea: overlay.markArea,
+          markLine: overlay.markLine,
         },
       ],
       graphic: [
         {
           type: "group",
           left: "center",
-          top: "middle",
+          top: "44%",
           children: [
             {
               type: "text",
               style: {
-                text: "暂无正式 score 回填",
+                text: "内部正式 run 暂未回填",
                 fill: "#0f172a",
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: 700,
                 textAlign: "center",
               },
             },
             {
               type: "text",
-              top: 30,
+              top: 28,
               style: {
-                text: "V000 / B000 / B001 / C000 完成后，这里切换为 weighted@20 与 delta 曲线",
+                text: "先用外部 benchmark 看天花板：rules-only 0.590，开源高分带 0.604 - 0.605",
                 fill: "#64748b",
                 fontSize: 12,
                 textAlign: "center",
@@ -252,6 +377,12 @@
 
   function scoredTrendOptions(data) {
     const scored = data.experiment_history.filter((item) => item.weighted != null);
+    const overlay = buildBenchmarkOverlay(data);
+    const range = getTrendRange(
+      data,
+      scored.map((item) => item.weighted),
+    );
+
     return {
       ...baseChartOptions(),
       legend: { top: 0, right: 0 },
@@ -265,7 +396,10 @@
         {
           type: "value",
           name: "weighted@20",
+          min: range.min,
+          max: range.max,
           axisLabel: { formatter: (value) => Number(value).toFixed(4) },
+          splitLine: { lineStyle: { color: "rgba(15, 23, 42, 0.08)" } },
         },
         {
           type: "value",
@@ -292,9 +426,11 @@
           name: "weighted@20",
           type: "line",
           smooth: true,
-          itemStyle: { color: "#1d4ed8" },
+          itemStyle: { color: colors.internalWeighted },
           areaStyle: { color: "rgba(29, 78, 216, 0.08)" },
           data: scored.map((item) => item.weighted),
+          markArea: overlay.markArea,
+          markLine: overlay.markLine,
         },
         {
           name: "delta",
@@ -336,6 +472,7 @@
     renderLedger(data);
     renderList("judgements", data.judgements);
     renderList("next-actions", data["next_actions"]);
+    renderBenchmarks(data);
     renderCharts(data);
   }
 
