@@ -19,6 +19,7 @@ logs/
 .mkdocs_site/
 checkpoints/
 models/
+tmp/
 *.pt
 *.pth
 *.ckpt

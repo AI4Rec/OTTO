@@ -1,40 +1,91 @@
 # OTTO 推荐系统复盘
 
-本知识库记录 Kaggle OTTO Recommender System 竞赛的可复现复盘。组织方式按一个完整推荐系统项目展开：任务与指标、数据理解、验证体系、方法路线、实验迭代、工程规范和最终项目讲述。
+<section class="home-shell">
+  <section class="home-hero">
+    <div class="home-hero__main">
+      <p class="home-hero__eyebrow">Kaggle · OTTO Recommender System</p>
+      <h2>会话级多目标推荐系统复盘</h2>
+      <p class="home-hero__lede">给定被截断的 <code>session</code>，分别预测未来的 <code>clicks</code>、<code>carts</code>、<code>orders</code>。官方指标是 weighted <code>Recall@20</code>，其中 <code>orders</code> 权重最高。</p>
+      <div class="home-hero__actions">
+        <a class="home-chip home-chip--primary" href="task_metric/">任务与指标</a>
+        <a class="home-chip" href="data_eda/">数据与 EDA</a>
+        <a class="home-chip" href="validation/">验证体系</a>
+        <a class="home-chip" href="methods/">方法路线</a>
+      </div>
+    </div>
+    <div class="home-hero__stats">
+      <div class="home-kpi">
+        <span>Train Sessions</span>
+        <b>12.9M</b>
+        <small>训练会话</small>
+      </div>
+      <div class="home-kpi">
+        <span>Train Events</span>
+        <b>216.7M</b>
+        <small>训练事件</small>
+      </div>
+      <div class="home-kpi">
+        <span>Targets</span>
+        <b>3</b>
+        <small>clicks / carts / orders</small>
+      </div>
+      <div class="home-kpi">
+        <span>Metric</span>
+        <b>Recall@20</b>
+        <small>official weighted metric</small>
+      </div>
+    </div>
+  </section>
 
-## 一句话结论
+  <section class="home-strip">
+    <article class="home-strip-card">
+      <span class="home-strip-card__label">任务本质</span>
+      <strong>多目标、短会话、时间漂移同时存在。</strong>
+      <p><code>orders</code> 稀疏但权重最高，不能只追点击。</p>
+    </article>
+    <article class="home-strip-card">
+      <span class="home-strip-card__label">当前状态</span>
+      <strong>EDA 已完成。</strong>
+      <p>验证闭环、标签构建与 baseline 还在执行中。</p>
+    </article>
+    <article class="home-strip-card">
+      <span class="home-strip-card__label">下一步</span>
+      <strong>时间切分 -> 标签生成 -> baseline</strong>
+      <p>先完成 popularity 与 session history，再扩展候选召回。</p>
+    </article>
+  </section>
 
-OTTO 是一个会话级、多目标推荐任务。给定被截断的 session，需要分别预测未来的 `clicks`、`carts`、`orders`。官方指标是 weighted Recall@20，其中 `orders` 权重最高，因此项目不能只优化高频点击，还必须单独处理低频但高价值的购买行为。
+  <section class="home-nav">
+    <a class="home-nav-card" href="task_metric/">
+      <span class="home-nav-card__tag">01</span>
+      <strong>任务与指标</strong>
+      <p>目标定义、Recall@20、三种行为的业务语义。</p>
+    </a>
+    <a class="home-nav-card" href="data_eda/">
+      <span class="home-nav-card__tag">02</span>
+      <strong>数据与 EDA</strong>
+      <p>字段口径、时间结构、长尾、短会话与关键分布。</p>
+    </a>
+    <a class="home-nav-card" href="validation/">
+      <span class="home-nav-card__tag">03</span>
+      <strong>验证体系</strong>
+      <p>时间切分、标签生成、指标检查与泄漏风险。</p>
+    </a>
+    <a class="home-nav-card" href="methods/">
+      <span class="home-nav-card__tag">04</span>
+      <strong>方法路线</strong>
+      <p>基线、候选召回、特征工程、排序与消融设计。</p>
+    </a>
+    <a class="home-nav-card" href="experiments/">
+      <span class="home-nav-card__tag">05</span>
+      <strong>实验看板</strong>
+      <p>实验编号、假设、主指标、结论与后续动作。</p>
+    </a>
+    <a class="home-nav-card" href="engineering/">
+      <span class="home-nav-card__tag">06</span>
+      <strong>工程规范</strong>
+      <p>目录契约、发布检查、可复现要求与协作边界。</p>
+    </a>
+  </section>
 
-第一轮全量 EDA 给出的关键信号：
-
-| 发现 | 证据 | 建模影响 |
-| :-- | :-- | :-- |
-| train/test 使用同一套嵌套 session schema | `session -> events[] -> aid, ts, type` | 可以统一抽象成事件级表，支撑 EDA、验证和特征。 |
-| test session 明显更短 | train 平均长度 16.80，test 平均长度 8.29 | 需要专门设计短 session 召回与 fallback。 |
-| clicks 占大多数，orders 指标权重最高 | train clicks 占 89.85%，orders 占 2.35%；orders 权重 0.60 | 需要 target-specific 候选与排序策略。 |
-| train/test 时间相邻 | test 紧接 train 之后开始 | 验证集必须按时间切分，不能随机切分。 |
-| 重复交互很常见 | train 69.20%、test 63.61% 的 session 重复出现同一 `aid` | session history 应作为第一层基线候选。 |
-| orders 更集中在 session 后段 | train 54.66%、test 73.75% 的 order 发生在 session 最后 30% | order 排序需要 recency 与相对位置特征。 |
-
-## 项目路线
-
-| 阶段 | 目标 | 状态 | 产物 |
-| :-- | :-- | :--: | :-- |
-| 任务定义 | 明确目标、指标和约束 | 已完成 | [任务与指标](task_metric.md) |
-| 数据与 EDA | 建立字段口径、全量统计、图表和洞察 | 已完成 | [数据与 EDA](data_eda.md) |
-| 验证体系 | 构建本地时间切分与标签 | 下一步 | [验证体系](validation.md) |
-| 基线 | 实现 popularity 与 session-history 推荐 | 下一步 | [实验看板](experiments.md) |
-| 候选召回 | 加入共现矩阵和 target-specific 候选池 | 计划中 | [方法路线](methods.md) |
-| 排序 | 加入特征工程与 GBDT reranking | 计划中 | [方法路线](methods.md) |
-| 项目讲述 | 汇总系统、指标、取舍和复盘 | 计划中 | [项目讲述](project_story.md) |
-
-## 页面导航
-
-- [任务与指标](task_metric.md)：任务定义、weighted Recall@20、建模约束。
-- [数据与 EDA](data_eda.md)：字段口径、数据规模、质量检查、图表和实验洞察。
-- [验证体系](validation.md)：时间切分、标签生成、指标检查和泄漏风险。
-- [方法路线](methods.md)：基线、共现召回、候选生成、排序和消融路线。
-- [实验看板](experiments.md)：实验设计、指标、结论与决策记录。
-- [工程规范](engineering.md)：目录结构、可复现要求和公开发布检查。
-- [项目讲述](project_story.md)：最终项目案例的讲述框架。
+</section>

@@ -8,22 +8,13 @@ site_dir: .mkdocs_site
 
 theme:
   name: material
+  custom_dir: overrides
   language: zh
+  font: false
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: blue grey
-      accent: teal
-      toggle:
-        icon: material/weather-night
-        name: 切换到深色模式
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: blue grey
-      accent: teal
-      toggle:
-        icon: material/weather-sunny
-        name: 切换到浅色模式
+    scheme: default
+    primary: blue grey
+    accent: teal
   features:
     - navigation.instant
     - navigation.tracking
@@ -67,6 +58,7 @@ extra_css:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js
   - assets/javascripts/ui_theme.js
+  - assets/javascripts/otto_search.js
   - assets/javascripts/eda_charts.js
 
 extra:

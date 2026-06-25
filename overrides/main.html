@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% import "partials/language.html" as lang with context %}
+
+{% block header %}
+  <header class="otto-topbar" data-md-component="header">
+    <div class="otto-topbar__inner">
+      <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" class="otto-brand" aria-label="{{ config.site_name }}">
+        <span class="otto-brand__mark">OT</span>
+        <span class="otto-brand__copy">
+          <strong>{{ config.site_name }}</strong>
+        </span>
+      </a>
+      <div class="otto-topbar__actions">
+        <button class="otto-search-trigger" type="button" data-otto-search-open aria-label="搜索文档">
+          <span class="otto-search-trigger__icon">
+            {% set icon = config.theme.icon.search or "material/magnify" %}
+            {% include ".icons/" ~ icon ~ ".svg" %}
+          </span>
+          <span>搜索</span>
+        </button>
+        {% if config.repo_url %}
+          <a class="otto-toolbar-link" href="{{ config.repo_url }}" target="_blank" rel="noopener">
+            仓库
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+  <div class="otto-search-modal" data-otto-search-modal hidden>
+    <div class="otto-search-modal__backdrop" data-otto-search-close></div>
+    <div class="otto-search-modal__panel" role="dialog" aria-modal="true" aria-label="搜索文档">
+      <div class="otto-search-modal__header">
+        <input class="otto-search-modal__input" type="search" placeholder="搜索标题、章节和正文关键词" data-otto-search-input>
+        <button class="otto-search-modal__close" type="button" data-otto-search-close aria-label="关闭搜索">关闭</button>
+      </div>
+      <p class="otto-search-modal__meta" data-otto-search-meta>输入中文或英文关键词开始搜索。</p>
+      <div class="otto-search-modal__results" data-otto-search-results></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block site_nav %}{% endblock %}
+
+{% block container %}
+  {% set toc = page.toc %}
+  {% set first = toc | first %}
+  {% if first and first.level == 1 %}
+    {% set toc = first.children %}
+  {% endif %}
+  {% if page.is_homepage %}
+    <div class="otto-home-layout">
+      <div class="otto-home-frame">
+        <div class="md-content" data-md-component="content">
+          <article class="md-content__inner md-typeset">
+            {% include "partials/content.html" %}
+          </article>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    {% set has_toc = toc and "toc.integrate" not in features %}
+    <div class="otto-doc-layout{% if not has_toc %} otto-doc-layout--wide{% endif %}">
+      {% if has_toc %}
+        <aside class="otto-doc-toc">
+          <div class="otto-doc-toc__inner">
+            <p class="otto-doc-toc__label">本页目录</p>
+            {% include "partials/toc.html" %}
+          </div>
+        </aside>
+      {% endif %}
+      <section class="otto-doc-content">
+        <div class="otto-doc-frame">
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              {% include "partials/content.html" %}
+            </article>
+          </div>
+        </div>
+        {% if page.previous_page or page.next_page %}
+          <nav class="otto-pager" aria-label="{{ lang.t('footer') }}">
+            {% if page.previous_page %}
+              <a href="{{ page.previous_page.url | url }}" class="otto-pager__link otto-pager__link--prev">
+                <span class="otto-pager__eyebrow">{{ lang.t("footer.previous") }}</span>
+                <strong>{{ page.previous_page.title }}</strong>
+              </a>
+            {% endif %}
+            {% if page.next_page %}
+              <a href="{{ page.next_page.url | url }}" class="otto-pager__link otto-pager__link--next">
+                <span class="otto-pager__eyebrow">{{ lang.t("footer.next") }}</span>
+                <strong>{{ page.next_page.title }}</strong>
+              </a>
+            {% endif %}
+          </nav>
+        {% endif %}
+      </section>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
