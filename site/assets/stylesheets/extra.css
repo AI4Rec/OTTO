@@ -11,8 +11,10 @@
   min-height: 500px;
 }
 
-.eda-chart-note {
+.eda-chart-takeaway {
   margin-top: -0.5rem;
-  color: var(--md-default-fg-color--light);
-  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+  color: var(--md-default-fg-color);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
