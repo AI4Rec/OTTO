@@ -53,6 +53,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1266,7 +1268,10 @@
 <li>同一个 <code>aid</code> 的重复点击、加购后再次点击、session 末尾的 cart/order，都应进入 session-item 特征。</li>
 </ul>
 <h2 id="session">Session 长度<a class="headerlink" href="#session" title="Permanent link">&para;</a></h2>
-<p><img alt="Session length distribution" src="../assets/figures/eda_session_length_hist.svg" /></p>
+<div class="eda-chart" data-eda-chart="length"></div>
+
+<p class="eda-chart-note">交互：hover 查看 session 数；拖动底部滑块缩放长度桶；右上角可还原或保存图片。静态备份图：<a href="assets/figures/eda_session_length_hist.svg">Session 长度分布 SVG</a>。</p>
+
 <table>
 <thead>
 <tr>
@@ -1344,7 +1349,10 @@
 <li>应显式做 intent segmentation：短 click-only session、cart session、purchase-intent session 不应完全共用同一套候选混合比例。</li>
 </ul>
 <h2 id="_6">行为类型分布<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p><img alt="Event type mix" src="../assets/figures/eda_event_type_mix.svg" /></p>
+<div class="eda-chart" data-eda-chart="type-mix"></div>
+
+<p class="eda-chart-note">交互：hover 查看绝对事件量和占比；点击 legend 可开关 clicks/carts/orders。静态备份图：<a href="assets/figures/eda_event_type_mix.svg">行为类型分布 SVG</a>。</p>
+
 <table>
 <thead>
 <tr>
@@ -1385,7 +1393,10 @@
 <li>event type 应是一等特征，而不是事后展示标签。</li>
 </ul>
 <h2 id="session_2">Session 级信号<a class="headerlink" href="#session_2" title="Permanent link">&para;</a></h2>
-<p><img alt="Session-level signals" src="../assets/figures/eda_session_signals.svg" /></p>
+<div class="eda-chart" data-eda-chart="signals"></div>
+
+<p class="eda-chart-note">交互：hover 查看每类 session 信号占比；点击 legend 对比 train/test。静态备份图：<a href="assets/figures/eda_session_signals.svg">Session 级信号 SVG</a>。</p>
+
 <table>
 <thead>
 <tr>
@@ -1463,7 +1474,10 @@
 <li>candidate scoring 应包含 last event type、last item id、last event recency。</li>
 </ul>
 <h2 id="_8">时间结构<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p><img alt="Daily event volume" src="../assets/figures/eda_daily_event_volume.svg" /></p>
+<div class="eda-chart eda-chart--wide" data-eda-chart="daily"></div>
+
+<p class="eda-chart-note">交互：hover 查看日期、星期、三类行为量和 order ratio；拖动底部滑块查看局部时间段。静态备份图：<a href="assets/figures/eda_daily_event_volume.svg">每日事件量 SVG</a>。</p>
+
 <p>train 与 test 是时间相邻窗口。这意味着随机验证不合适：它会泄漏未来热度，并高估模型泛化能力。本地验证应使用最近时间窗口，并把未来事件作为 label。</p>
 <h3 id="_9">时间戳与时区解释<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>原始 <code>ts</code> 是 Unix millisecond timestamp，本身是绝对时间，不携带用户所在地。为了可复现，当前统计统一用 UTC 转换日期；但 OTTO 数据来自 OTTO webshop/app 的匿名行为日志，业务解释时更合理的工作假设是欧洲电商场景，而不是北美用户场景。</p>
@@ -1562,6 +1576,10 @@
 </tr>
 </tbody>
 </table>
+<div class="eda-chart" data-eda-chart="weekday"></div>
+
+<p class="eda-chart-note">交互：柱形表示平均日事件量，折线表示 cart/order ratio，用于区分流量高峰和成交强度。</p>
+
 <p>初步 insight：</p>
 <ul>
 <li>Sunday 的事件量最高，平均每天 9.32M events，明显高于其他 weekday。这说明 candidate/ranking 需要考虑 weekly seasonality，尤其 recent popularity 不应只看全局累计。</li>
@@ -1576,7 +1594,10 @@
 <li>按 weekday/hour 计算 target-specific popularity，验证是否需要时间分桶热门候选。</li>
 </ul>
 <h2 id="item-popularity">Item Popularity 与长尾<a class="headerlink" href="#item-popularity" title="Permanent link">&para;</a></h2>
-<p><img alt="Item popularity long tail" src="../assets/figures/eda_item_popularity_loglog.svg" /></p>
+<div class="eda-chart eda-chart--wide" data-eda-chart="popularity"></div>
+
+<p class="eda-chart-note">交互：log-log 坐标下 hover 查看 rank 与 event count；支持缩放长尾区间。静态备份图：<a href="assets/figures/eda_item_popularity_loglog.svg">Item popularity 长尾 SVG</a>。</p>
+
 <table>
 <thead>
 <tr>
@@ -1684,8 +1705,14 @@
 <li>recent target-specific popularity 需要与 full-train target popularity 做基准对比。</li>
 </ul>
 <h2 id="_11">序列行为<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<p><img alt="Event type transition heatmap" src="../assets/figures/eda_type_transition_heatmap.svg" /></p>
-<p><img alt="Event type by relative position" src="../assets/figures/eda_type_position_deciles.svg" /></p>
+<div class="eda-chart" data-eda-chart="transition"></div>
+
+<p class="eda-chart-note">交互：hover 查看 from -> to 的转移次数和条件概率。静态备份图：<a href="assets/figures/eda_type_transition_heatmap.svg">行为类型转移 SVG</a>。</p>
+
+<div class="eda-chart" data-eda-chart="position"></div>
+
+<p class="eda-chart-note">交互：hover 查看每类行为在 session 相对位置分桶中的占比。静态备份图：<a href="assets/figures/eda_type_position_deciles.svg">行为类型相对位置 SVG</a>。</p>
+
 <h3 id="_12">行为类型条件转移<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1909,6 +1936,10 @@
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+      
+        <script src="../assets/javascripts/eda_charts.js"></script>
       
     
   </body>
