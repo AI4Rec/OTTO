@@ -34,6 +34,41 @@ event -> aid, ts, type
 session:int64, aid:int64, ts:int64, type:string, event_idx:int32
 ```
 
+## 业务语义补充
+
+`clicks`、`carts`、`orders` 分别对应点击商品、加入购物车、下单购买，代表由弱到强的购买意图。它们不能只被当成分类标签：
+
+| type | 现实动作 | 推荐系统含义 | 建模启发 |
+| :-- | :-- | :-- | :-- |
+| `clicks` | 点击或打开商品详情 | 浏览兴趣、探索、比较 | 适合构建 session history 和 click-click co-visitation，但不能等同于购买意图 |
+| `carts` | 加入购物车 | 购买考虑、暂存、凑单 | 是 carts target，也是 orders 的强先导信号 |
+| `orders` | 下单购买 | 成交行为 | 权重最高但稀疏，需要 order-specific candidates、late-session weighting 和 cart-to-order features |
+
+当前 EDA 已证明：clicks 占 89.85% 的 train events，orders 只占 2.35%，但官方权重中 orders 占 0.60。因此后续建模不应把 orders 当成 clicks 的自然副产品。
+
+## 时间语义补充
+
+原始 `ts` 是 Unix millisecond timestamp，不携带用户所在地。当前统计用 UTC 保证可复现；业务解释时，考虑到 OTTO webshop/app 的场景，更合理的工作假设是欧洲电商自然日，而不是北美用户自然日。
+
+| split | UTC 时间窗口 | Europe/Berlin 夏令时窗口 | 解读 |
+| :-- | :-- | :-- | :-- |
+| train | 2022-07-31 22:00 至 2022-08-28 21:59 | 2022-08-01 00:00 至 2022-08-28 23:59 | UTC 边界正好对应柏林时间自然日 |
+| test | 2022-08-28 22:00 至 2022-09-04 21:59 | 2022-08-29 00:00 至 2022-09-04 23:59 | test 是紧随 train 的完整一周 |
+
+按 UTC 日期排除 split 起始残缺日后，train 覆盖 4 个完整周：
+
+| weekday | train avg events/day | train avg orders/day | train order ratio | train cart ratio |
+| :-- | --: | --: | --: | --: |
+| Monday | 7,625,284 | 183,918 | 2.41% | 7.65% |
+| Tuesday | 7,611,476 | 196,181 | 2.58% | 8.02% |
+| Wednesday | 7,464,514 | 175,375 | 2.35% | 7.86% |
+| Thursday | 7,133,327 | 162,004 | 2.27% | 7.77% |
+| Friday | 7,322,217 | 165,154 | 2.26% | 7.80% |
+| Saturday | 7,611,951 | 166,570 | 2.19% | 7.67% |
+| Sunday | 9,322,976 | 224,156 | 2.40% | 7.82% |
+
+初步结论：Sunday 事件量最高，但 Tuesday 的 order ratio 最高，说明“浏览强度”和“成交强度”不是同一个时间模式。后续 EDA v2 需要补小时级 `hour_of_day`、`type_ratio by weekday/hour`、`order_hour`、`target-specific popularity by time bucket`。
+
 ## 核心发现
 
 | 发现 | 证据 | 工程影响 |
