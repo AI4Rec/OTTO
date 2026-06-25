@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A reproducible recommender-system study of the Kaggle OTTO competition.">
+        <meta name="description" content="Kaggle OTTO 推荐系统竞赛的可复现项目报告与实验工作区。">
       
       
       
@@ -27,7 +27,7 @@
     
     
       
-        <title>Methods - OTTO Recommender System Study</title>
+        <title>方法路线 - OTTO 推荐系统复盘</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#methods" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="OTTO Recommender System Study" class="md-header__button md-logo" aria-label="OTTO Recommender System Study" data-md-component="logo">
+    <a href=".." title="OTTO 推荐系统复盘" class="md-header__button md-logo" aria-label="OTTO 推荐系统复盘" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,13 +108,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            OTTO Recommender System Study
+            OTTO 推荐系统复盘
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Methods
+              方法路线
             
           </span>
         </div>
@@ -232,13 +232,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="OTTO Recommender System Study" class="md-nav__button md-logo" aria-label="OTTO Recommender System Study" data-md-component="logo">
+    <a href=".." title="OTTO 推荐系统复盘" class="md-nav__button md-logo" aria-label="OTTO 推荐系统复盘" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    OTTO Recommender System Study
+    OTTO 推荐系统复盘
   </label>
   
     <div class="md-nav__source">
@@ -269,7 +269,7 @@
   <span class="md-ellipsis">
     
   
-    Overview
+    总览
   
 
     
@@ -296,7 +296,7 @@
   <span class="md-ellipsis">
     
   
-    Task & Metric
+    任务与指标
   
 
     
@@ -323,7 +323,7 @@
   <span class="md-ellipsis">
     
   
-    Data & EDA
+    数据与 EDA
   
 
     
@@ -350,7 +350,7 @@
   <span class="md-ellipsis">
     
   
-    Validation
+    验证体系
   
 
     
@@ -386,7 +386,7 @@
   <span class="md-ellipsis">
     
   
-    Methods
+    方法路线
   
 
     
@@ -404,7 +404,7 @@
   <span class="md-ellipsis">
     
   
-    Methods
+    方法路线
   
 
     
@@ -430,10 +430,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#system-architecture" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Architecture
+        系统架构
       
     </span>
   </a>
@@ -441,10 +441,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#baseline-layer" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Baseline Layer
+        基线层
       
     </span>
   </a>
@@ -452,10 +452,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#candidate-generation" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Candidate Generation
+        候选召回
       
     </span>
   </a>
@@ -463,10 +463,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ranking-layer" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ranking Layer
+        排序层
       
     </span>
   </a>
@@ -474,10 +474,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ablation-strategy" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ablation Strategy
+        消融策略
       
     </span>
   </a>
@@ -485,10 +485,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#solution-study-backlog" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Solution-Study Backlog
+        高分方案研读清单
       
     </span>
   </a>
@@ -517,7 +517,7 @@
   <span class="md-ellipsis">
     
   
-    Experiments
+    实验看板
   
 
     
@@ -544,7 +544,7 @@
   <span class="md-ellipsis">
     
   
-    Engineering
+    工程规范
   
 
     
@@ -571,7 +571,7 @@
   <span class="md-ellipsis">
     
   
-    Project Story
+    项目讲述
   
 
     
@@ -611,10 +611,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#system-architecture" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Architecture
+        系统架构
       
     </span>
   </a>
@@ -622,10 +622,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#baseline-layer" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Baseline Layer
+        基线层
       
     </span>
   </a>
@@ -633,10 +633,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#candidate-generation" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Candidate Generation
+        候选召回
       
     </span>
   </a>
@@ -644,10 +644,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ranking-layer" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ranking Layer
+        排序层
       
     </span>
   </a>
@@ -655,10 +655,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ablation-strategy" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ablation Strategy
+        消融策略
       
     </span>
   </a>
@@ -666,10 +666,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#solution-study-backlog" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Solution-Study Backlog
+        高分方案研读清单
       
     </span>
   </a>
@@ -696,8 +696,8 @@
   
 
 
-<h1 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h1>
-<h2 id="system-architecture">System Architecture<a class="headerlink" href="#system-architecture" title="Permanent link">&para;</a></h2>
+<h1 id="_1">方法路线<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">系统架构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Raw session events
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; event-level table
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  -&gt; validation split
@@ -715,215 +715,215 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  -&gt; target-specific ranking
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>  -&gt; top-20 submission
 </code></pre></div>
-<h2 id="baseline-layer">Baseline Layer<a class="headerlink" href="#baseline-layer" title="Permanent link">&para;</a></h2>
+<h2 id="_3">基线层<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Expected value</th>
+<th style="text-align: left;">方法</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">预期价值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">Global popularity</td>
-<td style="text-align: left;">Recommend globally frequent items</td>
-<td style="text-align: left;">Robust fallback for short sessions</td>
+<td style="text-align: left;">推荐全局高频 item</td>
+<td style="text-align: left;">短 session 的稳健 fallback</td>
 </tr>
 <tr>
 <td style="text-align: left;">Type-specific popularity</td>
-<td style="text-align: left;">Separate popular items by click/cart/order</td>
-<td style="text-align: left;">Better target alignment</td>
+<td style="text-align: left;">分别统计 click/cart/order 热门 item</td>
+<td style="text-align: left;">与不同 target 更对齐</td>
 </tr>
 <tr>
 <td style="text-align: left;">Session history</td>
-<td style="text-align: left;">Recommend recently interacted items</td>
-<td style="text-align: left;">Strong continuation signal</td>
+<td style="text-align: left;">推荐 session 内最近交互过的 item</td>
+<td style="text-align: left;">强 session continuation 信号</td>
 </tr>
 <tr>
 <td style="text-align: left;">Weighted session history</td>
-<td style="text-align: left;">Weight recency and event type</td>
-<td style="text-align: left;">Improves order-sensitive ranking</td>
+<td style="text-align: left;">按 recency 和 event type 加权</td>
+<td style="text-align: left;">更适合 order-sensitive 排序</td>
 </tr>
 </tbody>
 </table>
-<p>EDA-driven additions:</p>
+<p>EDA 驱动的补充：</p>
 <ul>
-<li>Use separate fallback lists for <code>clicks</code>, <code>carts</code>, and <code>orders</code>; top items differ by target.</li>
-<li>Segment metrics by session length because the test split is much shorter than train.</li>
-<li>Add a stronger order path based on late-session events and cart-to-order transitions.</li>
+<li><code>clicks</code>、<code>carts</code>、<code>orders</code> 应分别维护 fallback list，因为热门 item 不同。</li>
+<li>指标需要按 session length 分桶，因为 test 明显短于 train。</li>
+<li>orders 路径需要额外加强，重点利用 late-session events 与 cart-to-order transitions。</li>
 </ul>
-<h2 id="candidate-generation">Candidate Generation<a class="headerlink" href="#candidate-generation" title="Permanent link">&para;</a></h2>
-<p>Candidate generation should be evaluated by target-level recall coverage before ranking.</p>
+<h2 id="_4">候选召回<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>候选生成需要先按 target 评估 recall coverage，再进入排序阶段。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Candidate source</th>
-<th style="text-align: left;">Idea</th>
-<th style="text-align: left;">Planned diagnostics</th>
+<th style="text-align: left;">候选来源</th>
+<th style="text-align: left;">思路</th>
+<th style="text-align: left;">计划诊断</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">Session history</td>
-<td style="text-align: left;">Seen items in reverse chronological order</td>
-<td style="text-align: left;">Coverage by session length</td>
+<td style="text-align: left;">按时间倒序取 session 内已见 item</td>
+<td style="text-align: left;">按 session length 看 coverage</td>
 </tr>
 <tr>
 <td style="text-align: left;">Recent popularity</td>
-<td style="text-align: left;">Items popular near validation/test window</td>
-<td style="text-align: left;">Drift vs global popularity</td>
+<td style="text-align: left;">使用验证或测试窗口附近的热门 item</td>
+<td style="text-align: left;">对比 recent 与 global popularity</td>
 </tr>
 <tr>
 <td style="text-align: left;">Click-click co-visitation</td>
-<td style="text-align: left;">Items viewed together</td>
-<td style="text-align: left;">Click target recall</td>
+<td style="text-align: left;">同一 session 中共同浏览的 item</td>
+<td style="text-align: left;">clicks target recall</td>
 </tr>
 <tr>
 <td style="text-align: left;">Cart/order co-visitation</td>
-<td style="text-align: left;">Items carted or ordered together</td>
-<td style="text-align: left;">Cart/order target recall</td>
+<td style="text-align: left;">共同加购或购买的 item</td>
+<td style="text-align: left;">carts/orders target recall</td>
 </tr>
 <tr>
 <td style="text-align: left;">Mixed target pool</td>
-<td style="text-align: left;">Different source mix by target</td>
-<td style="text-align: left;">Weighted recall contribution</td>
+<td style="text-align: left;">每个 target 使用不同候选源比例</td>
+<td style="text-align: left;">weighted recall contribution</td>
 </tr>
 </tbody>
 </table>
-<p>EDA points to these first co-visitation matrices:</p>
+<p>EDA 优先支持的共现矩阵：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Matrix</th>
-<th style="text-align: left;">Motivation</th>
-<th style="text-align: left;">Target</th>
+<th style="text-align: left;">矩阵</th>
+<th style="text-align: left;">动机</th>
+<th style="text-align: left;">target</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">click -&gt; click</td>
-<td style="text-align: left;">Most transitions are click continuation</td>
+<td style="text-align: left;">大多数转移是 click continuation</td>
 <td style="text-align: left;">clicks</td>
 </tr>
 <tr>
 <td style="text-align: left;">click -&gt; cart</td>
-<td style="text-align: left;">8-9% of click transitions move into cart</td>
+<td style="text-align: left;">约 8-9% 的 click transition 进入 cart</td>
 <td style="text-align: left;">carts</td>
 </tr>
 <tr>
 <td style="text-align: left;">cart -&gt; order</td>
-<td style="text-align: left;">Roughly 9-10% of cart transitions move into order</td>
+<td style="text-align: left;">约 9-10% 的 cart transition 进入 order</td>
 <td style="text-align: left;">orders</td>
 </tr>
 <tr>
 <td style="text-align: left;">order -&gt; order</td>
-<td style="text-align: left;">Orders often repeat after orders</td>
+<td style="text-align: left;">order 之后继续 order 的概率较高</td>
 <td style="text-align: left;">orders</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ranking-layer">Ranking Layer<a class="headerlink" href="#ranking-layer" title="Permanent link">&para;</a></h2>
-<p>After candidate recall is strong enough, ranking can use a GBDT model such as LightGBM or XGBoost.</p>
-<p>Feature groups:</p>
+<h2 id="_5">排序层<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>当 candidate recall 足够后，可以使用 LightGBM 或 XGBoost 这类 GBDT 模型做 reranking。</p>
+<p>特征分组：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Group</th>
-<th style="text-align: left;">Examples</th>
+<th style="text-align: left;">分组</th>
+<th style="text-align: left;">示例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">Session features</td>
-<td style="text-align: left;">Length, unique item count, repeated item ratio, last event type</td>
+<td style="text-align: left;">长度、unique item 数、重复 item 比例、last event type</td>
 </tr>
 <tr>
 <td style="text-align: left;">Item features</td>
-<td style="text-align: left;">Global popularity, recent popularity, cart/order ratios</td>
+<td style="text-align: left;">全局热度、近期热度、cart/order ratio</td>
 </tr>
 <tr>
 <td style="text-align: left;">Session-item features</td>
-<td style="text-align: left;">Last seen position, count in session, max event type weight</td>
+<td style="text-align: left;">last seen position、session 内出现次数、max event type weight</td>
 </tr>
 <tr>
 <td style="text-align: left;">Candidate-source features</td>
-<td style="text-align: left;">Source id, source rank, number of sources</td>
+<td style="text-align: left;">source id、source rank、source count</td>
 </tr>
 <tr>
 <td style="text-align: left;">Time features</td>
-<td style="text-align: left;">Recency, time gap, window-specific counts</td>
+<td style="text-align: left;">recency、time gap、window-specific counts</td>
 </tr>
 </tbody>
 </table>
-<p>EDA-backed high-priority features:</p>
+<p>高优先级 EDA 特征：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Feature</th>
-<th style="text-align: left;">Reason</th>
+<th style="text-align: left;">特征</th>
+<th style="text-align: left;">理由</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>session_len</code>, <code>unique_aid_count</code></td>
-<td style="text-align: left;">Test sessions are short and need different fallback behavior.</td>
+<td style="text-align: left;">test session 短，需要不同 fallback 行为。</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>aid_count_in_session</code></td>
-<td style="text-align: left;">Repeated-aid sessions are common.</td>
+<td style="text-align: left;">repeated-aid session 很常见。</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>last_seen_rank</code>, <code>relative_position</code></td>
-<td style="text-align: left;">Orders are concentrated near the session tail.</td>
+<td style="text-align: left;">orders 集中在 session 后段。</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>last_event_type</code></td>
-<td style="text-align: left;">Last cart/order is an intent signal.</td>
+<td style="text-align: left;">last cart/order 是意图信号。</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>target_popularity_rank</code></td>
-<td style="text-align: left;">Popular items differ by target.</td>
+<td style="text-align: left;">不同 target 的热门 item 不同。</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>source_count</code>, <code>best_source_rank</code></td>
-<td style="text-align: left;">Candidate-source agreement can improve reranking.</td>
+<td style="text-align: left;">多候选源一致性可提升 reranking。</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ablation-strategy">Ablation Strategy<a class="headerlink" href="#ablation-strategy" title="Permanent link">&para;</a></h2>
-<p>Every method should answer:</p>
+<h2 id="_6">消融策略<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>每个方法都要回答：</p>
 <ul>
-<li>Which target improved?</li>
-<li>Did the gain come from candidate recall or ranking?</li>
-<li>How much compute and memory did it add?</li>
-<li>Does the method help short sessions, long sessions, or both?</li>
-<li>Does it improve local validation consistently?</li>
+<li>哪个 target 提升了？</li>
+<li>增益来自 candidate recall 还是 ranking？</li>
+<li>新方法增加了多少运行时间、内存和存储？</li>
+<li>方法更适合短 session、长 session，还是两者都有效？</li>
+<li>本地验证是否稳定提升？</li>
 </ul>
-<h2 id="solution-study-backlog">Solution-Study Backlog<a class="headerlink" href="#solution-study-backlog" title="Permanent link">&para;</a></h2>
+<h2 id="_7">高分方案研读清单<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Source</th>
-<th style="text-align: left;">Topic to extract</th>
-<th style="text-align: left;">Planned output</th>
+<th style="text-align: left;">来源</th>
+<th style="text-align: left;">需要提取的内容</th>
+<th style="text-align: left;">计划产物</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Top Kaggle solutions</td>
-<td style="text-align: left;">Candidate generation, co-visitation variants, ranker features</td>
-<td style="text-align: left;">Method map</td>
+<td style="text-align: left;">Kaggle top solutions</td>
+<td style="text-align: left;">候选生成、共现变体、ranker features</td>
+<td style="text-align: left;">方法图谱</td>
 </tr>
 <tr>
-<td style="text-align: left;">Public validation discussions</td>
-<td style="text-align: left;">Time split and leaderboard correlation</td>
-<td style="text-align: left;">Validation report</td>
+<td style="text-align: left;">公开验证讨论</td>
+<td style="text-align: left;">时间切分与 leaderboard 相关性</td>
+<td style="text-align: left;">验证报告</td>
 </tr>
 <tr>
-<td style="text-align: left;">OTTO dataset notes</td>
-<td style="text-align: left;">Data release context and schema details</td>
-<td style="text-align: left;">Data card</td>
+<td style="text-align: left;">OTTO 数据说明</td>
+<td style="text-align: left;">数据发布背景与 schema 细节</td>
+<td style="text-align: left;">数据卡片</td>
 </tr>
 </tbody>
 </table>

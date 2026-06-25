@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A reproducible recommender-system study of the Kaggle OTTO competition.">
+        <meta name="description" content="Kaggle OTTO 推荐系统竞赛的可复现项目报告与实验工作区。">
       
       
       
@@ -27,7 +27,7 @@
     
     
       
-        <title>Data & EDA - OTTO Recommender System Study</title>
+        <title>数据与 EDA - OTTO 推荐系统复盘</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-eda" class="md-skip">
+        <a href="#eda" class="md-skip">
           跳转至
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="OTTO Recommender System Study" class="md-header__button md-logo" aria-label="OTTO Recommender System Study" data-md-component="logo">
+    <a href=".." title="OTTO 推荐系统复盘" class="md-header__button md-logo" aria-label="OTTO 推荐系统复盘" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,13 +108,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            OTTO Recommender System Study
+            OTTO 推荐系统复盘
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Data & EDA
+              数据与 EDA
             
           </span>
         </div>
@@ -232,13 +232,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="OTTO Recommender System Study" class="md-nav__button md-logo" aria-label="OTTO Recommender System Study" data-md-component="logo">
+    <a href=".." title="OTTO 推荐系统复盘" class="md-nav__button md-logo" aria-label="OTTO 推荐系统复盘" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    OTTO Recommender System Study
+    OTTO 推荐系统复盘
   </label>
   
     <div class="md-nav__source">
@@ -269,7 +269,7 @@
   <span class="md-ellipsis">
     
   
-    Overview
+    总览
   
 
     
@@ -296,7 +296,7 @@
   <span class="md-ellipsis">
     
   
-    Task & Metric
+    任务与指标
   
 
     
@@ -332,7 +332,7 @@
   <span class="md-ellipsis">
     
   
-    Data & EDA
+    数据与 EDA
   
 
     
@@ -350,7 +350,7 @@
   <span class="md-ellipsis">
     
   
-    Data & EDA
+    数据与 EDA
   
 
     
@@ -376,10 +376,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#executive-summary" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Executive Summary
+        一句话结论
       
     </span>
   </a>
@@ -387,10 +387,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#feature-scouting-summary" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Feature Scouting Summary
+        特征侦察摘要
       
     </span>
   </a>
@@ -398,10 +398,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#full-data-scale" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Full Data Scale
+        全量数据规模
       
     </span>
   </a>
@@ -409,10 +409,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#schema-contract" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schema Contract
+        字段口径
       
     </span>
   </a>
@@ -420,22 +420,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#session-length" class="md-nav__link">
+  <a href="#session" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Session Length
+        Session 长度
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Session Length">
+    <nav class="md-nav" aria-label="Session 长度">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#session-intent-segments" class="md-nav__link">
+  <a href="#session_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Session Intent Segments
+        Session 意图分层
       
     </span>
   </a>
@@ -448,10 +448,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#behavior-type-distribution" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Behavior Type Distribution
+        行为类型分布
       
     </span>
   </a>
@@ -459,22 +459,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#session-level-signals" class="md-nav__link">
+  <a href="#session_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Session-Level Signals
+        Session 级信号
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Session-Level Signals">
+    <nav class="md-nav" aria-label="Session 级信号">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#first-and-last-event-types" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        First and Last Event Types
+        首尾事件类型
       
     </span>
   </a>
@@ -487,10 +487,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#temporal-structure" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Temporal Structure
+        时间结构
       
     </span>
   </a>
@@ -498,10 +498,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#item-popularity-and-long-tail" class="md-nav__link">
+  <a href="#item-popularity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Item Popularity and Long Tail
+        Item Popularity 与长尾
       
     </span>
   </a>
@@ -537,22 +537,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sequence-behavior" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sequence Behavior
+        序列行为
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Sequence Behavior">
+    <nav class="md-nav" aria-label="序列行为">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#conditional-event-type-transitions" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conditional Event-Type Transitions
+        行为类型条件转移
       
     </span>
   </a>
@@ -560,10 +560,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#relative-position-of-orders" class="md-nav__link">
+  <a href="#orders" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relative Position of Orders
+        Orders 相对位置
       
     </span>
   </a>
@@ -576,10 +576,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#insight-to-experiment-map" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Insight to Experiment Map
+        洞察到实验的映射
       
     </span>
   </a>
@@ -587,10 +587,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#generated-artifacts" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Generated Artifacts
+        生成产物
       
     </span>
   </a>
@@ -619,7 +619,7 @@
   <span class="md-ellipsis">
     
   
-    Validation
+    验证体系
   
 
     
@@ -646,7 +646,7 @@
   <span class="md-ellipsis">
     
   
-    Methods
+    方法路线
   
 
     
@@ -673,7 +673,7 @@
   <span class="md-ellipsis">
     
   
-    Experiments
+    实验看板
   
 
     
@@ -700,7 +700,7 @@
   <span class="md-ellipsis">
     
   
-    Engineering
+    工程规范
   
 
     
@@ -727,7 +727,7 @@
   <span class="md-ellipsis">
     
   
-    Project Story
+    项目讲述
   
 
     
@@ -767,10 +767,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#executive-summary" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Executive Summary
+        一句话结论
       
     </span>
   </a>
@@ -778,10 +778,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#feature-scouting-summary" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Feature Scouting Summary
+        特征侦察摘要
       
     </span>
   </a>
@@ -789,10 +789,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#full-data-scale" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Full Data Scale
+        全量数据规模
       
     </span>
   </a>
@@ -800,10 +800,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#schema-contract" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schema Contract
+        字段口径
       
     </span>
   </a>
@@ -811,22 +811,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#session-length" class="md-nav__link">
+  <a href="#session" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Session Length
+        Session 长度
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Session Length">
+    <nav class="md-nav" aria-label="Session 长度">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#session-intent-segments" class="md-nav__link">
+  <a href="#session_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Session Intent Segments
+        Session 意图分层
       
     </span>
   </a>
@@ -839,10 +839,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#behavior-type-distribution" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Behavior Type Distribution
+        行为类型分布
       
     </span>
   </a>
@@ -850,22 +850,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#session-level-signals" class="md-nav__link">
+  <a href="#session_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Session-Level Signals
+        Session 级信号
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Session-Level Signals">
+    <nav class="md-nav" aria-label="Session 级信号">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#first-and-last-event-types" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        First and Last Event Types
+        首尾事件类型
       
     </span>
   </a>
@@ -878,10 +878,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#temporal-structure" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Temporal Structure
+        时间结构
       
     </span>
   </a>
@@ -889,10 +889,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#item-popularity-and-long-tail" class="md-nav__link">
+  <a href="#item-popularity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Item Popularity and Long Tail
+        Item Popularity 与长尾
       
     </span>
   </a>
@@ -928,22 +928,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sequence-behavior" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sequence Behavior
+        序列行为
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Sequence Behavior">
+    <nav class="md-nav" aria-label="序列行为">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#conditional-event-type-transitions" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conditional Event-Type Transitions
+        行为类型条件转移
       
     </span>
   </a>
@@ -951,10 +951,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#relative-position-of-orders" class="md-nav__link">
+  <a href="#orders" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relative Position of Orders
+        Orders 相对位置
       
     </span>
   </a>
@@ -967,10 +967,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#insight-to-experiment-map" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Insight to Experiment Map
+        洞察到实验的映射
       
     </span>
   </a>
@@ -978,10 +978,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#generated-artifacts" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Generated Artifacts
+        生成产物
       
     </span>
   </a>
@@ -1008,60 +1008,60 @@
   
 
 
-<h1 id="data-eda">Data &amp; EDA<a class="headerlink" href="#data-eda" title="Permanent link">&para;</a></h1>
-<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
-<p>This page summarizes a full-dataset EDA pass for the Kaggle OTTO session dataset. The analysis treats EDA as scouting for feature engineering: every statistic should either validate the data contract, expose a modeling risk, or suggest a concrete baseline, candidate, feature, or validation decision.</p>
-<p>Key findings:</p>
+<h1 id="eda">数据与 EDA<a class="headerlink" href="#eda" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一句话结论<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本页汇总 Kaggle OTTO session 数据集的全量 EDA。这里的 EDA 不只是“看分布”，而是为后续工程做侦察：每个统计都应该验证字段口径、暴露建模风险，或指向明确的 baseline、candidate、feature、validation 决策。</p>
+<p>核心发现：</p>
 <ul>
-<li>The task is strongly session-driven: repeated item interactions are common and should be included as a first candidate source.</li>
-<li>The public test split has much shorter sessions than train, so fallback and short-session strategies are not optional.</li>
-<li>Clicks dominate event volume, while orders dominate the metric weight; target-specific candidates and ranking are needed.</li>
-<li>Item popularity is extremely long-tailed, making top-popularity fallback useful but insufficient.</li>
-<li>Train and test are chronological neighbors; validation should be time-based and should explicitly guard against leakage.</li>
+<li>任务强依赖 session 内行为：重复 item 交互非常常见，session history 应作为第一候选源。</li>
+<li>public test session 明显短于 train，短 session fallback 必须单独设计。</li>
+<li>clicks 占事件量大头，但 orders 占指标权重大头，需要 target-specific 候选与排序。</li>
+<li>item popularity 极度长尾，热门 fallback 有价值但远远不够。</li>
+<li>train/test 是时间相邻窗口，验证必须按时间切分，并显式做泄漏检查。</li>
 </ul>
-<h2 id="feature-scouting-summary">Feature Scouting Summary<a class="headerlink" href="#feature-scouting-summary" title="Permanent link">&para;</a></h2>
+<h2 id="_2">特征侦察摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">EDA signal</th>
-<th style="text-align: left;">What it says</th>
-<th style="text-align: left;">Feature/candidate action</th>
+<th style="text-align: left;">EDA 信号</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">候选或特征动作</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Test sessions are short</td>
-<td style="text-align: left;">Test mean length is 8.29 vs train 16.80; test p50 is only 4 events</td>
-<td style="text-align: left;">Build a short-session path: recent unique aids + type-specific popularity + recent popularity</td>
+<td style="text-align: left;">test session 更短</td>
+<td style="text-align: left;">test 平均长度 8.29，train 平均长度 16.80；test p50 只有 4 个事件</td>
+<td style="text-align: left;">建立短 session 路径：recent unique aids + target-specific popularity + recent popularity</td>
 </tr>
 <tr>
-<td style="text-align: left;">Repeated aids are common</td>
-<td style="text-align: left;">69.20% of train sessions and 63.61% of test sessions repeat an item</td>
-<td style="text-align: left;">Add <code>aid_count_in_session</code>, <code>last_seen_rank</code>, <code>first_seen_rank</code>, and repeated-aid flags</td>
+<td style="text-align: left;">重复 <code>aid</code> 很常见</td>
+<td style="text-align: left;">69.20% 的 train session、63.61% 的 test session 重复出现同一 item</td>
+<td style="text-align: left;">增加 <code>aid_count_in_session</code>、<code>last_seen_rank</code>、<code>first_seen_rank</code>、repeated-aid flag</td>
 </tr>
 <tr>
-<td style="text-align: left;">Orders happen late</td>
-<td style="text-align: left;">In train, 54.66% of order events occur in the final 30% of a session; in test, 73.75% do</td>
-<td style="text-align: left;">Weight late-session events more heavily for order candidates and ranking</td>
+<td style="text-align: left;">orders 更靠近 session 后段</td>
+<td style="text-align: left;">train 中 54.66% 的 order、test 中 73.75% 的 order 出现在 session 最后 30%</td>
+<td style="text-align: left;">order candidate 和 ranking 更重视 late-session event</td>
 </tr>
 <tr>
-<td style="text-align: left;">Cart-to-order transition is meaningful</td>
-<td style="text-align: left;"><code>cart-&gt;order</code> conditional probability is 8.99% in train and 9.77% in test</td>
-<td style="text-align: left;">Build cart-to-order co-visitation and cart/order-specific item features</td>
+<td style="text-align: left;">cart-to-order 转移有信息量</td>
+<td style="text-align: left;"><code>cart-&gt;order</code> 条件概率 train 为 8.99%，test 为 9.77%</td>
+<td style="text-align: left;">构建 cart-to-order co-visitation 与 cart/order-specific item features</td>
 </tr>
 <tr>
-<td style="text-align: left;">Top popularity drifts</td>
-<td style="text-align: left;">Top100 train/test item overlap is 47 items; Jaccard is 0.3072</td>
-<td style="text-align: left;">Compare global, recent-window, and target-specific popularity</td>
+<td style="text-align: left;">热门 item 漂移明显</td>
+<td style="text-align: left;">train/test top100 item overlap 为 47，Jaccard 为 0.3072</td>
+<td style="text-align: left;">对比 global、recent-window、target-specific popularity</td>
 </tr>
 <tr>
-<td style="text-align: left;">No cold test items</td>
-<td style="text-align: left;">100% of test aids appear in train</td>
-<td style="text-align: left;">Candidate generation can focus on observed item graph; cold-start is not the main bottleneck</td>
+<td style="text-align: left;">test 无冷启动 item</td>
+<td style="text-align: left;">test 中 100% 的 <code>aid</code> 都在 train 出现过</td>
+<td style="text-align: left;">候选生成可重点利用已观测 item graph，cold-start 不是主要矛盾</td>
 </tr>
 </tbody>
 </table>
-<h2 id="full-data-scale">Full Data Scale<a class="headerlink" href="#full-data-scale" title="Permanent link">&para;</a></h2>
+<h2 id="_3">全量数据规模<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1092,15 +1092,15 @@
 </tr>
 </tbody>
 </table>
-<h2 id="schema-contract">Schema Contract<a class="headerlink" href="#schema-contract" title="Permanent link">&para;</a></h2>
+<h2 id="_4">字段口径<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Field</th>
-<th style="text-align: left;">Level</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Meaning</th>
-<th style="text-align: left;">Feature-engineering use</th>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">粒度</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">下游用途</th>
 </tr>
 </thead>
 <tbody>
@@ -1108,43 +1108,43 @@
 <td style="text-align: left;"><code>session</code></td>
 <td style="text-align: left;">session</td>
 <td style="text-align: left;">integer</td>
-<td style="text-align: left;">Anonymous session id</td>
-<td style="text-align: left;">Group key, validation label key, submission key</td>
+<td style="text-align: left;">匿名 session id</td>
+<td style="text-align: left;">group key、验证标签 key、submission key</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>events</code></td>
 <td style="text-align: left;">session</td>
 <td style="text-align: left;">list</td>
-<td style="text-align: left;">Ordered event sequence</td>
-<td style="text-align: left;">Session history, sequence features</td>
+<td style="text-align: left;">按时间排序的事件序列</td>
+<td style="text-align: left;">session history、序列特征</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>aid</code></td>
 <td style="text-align: left;">event</td>
 <td style="text-align: left;">integer</td>
-<td style="text-align: left;">Item id</td>
-<td style="text-align: left;">Candidate id, item features, co-visitation entity</td>
+<td style="text-align: left;">item id</td>
+<td style="text-align: left;">candidate id、item features、co-visitation entity</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>ts</code></td>
 <td style="text-align: left;">event</td>
 <td style="text-align: left;">integer</td>
-<td style="text-align: left;">Millisecond timestamp</td>
-<td style="text-align: left;">Time split, recency, drift, co-visitation windows</td>
+<td style="text-align: left;">毫秒级时间戳</td>
+<td style="text-align: left;">时间切分、recency、drift、co-visitation window</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>type</code></td>
 <td style="text-align: left;">event</td>
 <td style="text-align: left;">string</td>
-<td style="text-align: left;"><code>clicks</code>, <code>carts</code>, <code>orders</code></td>
-<td style="text-align: left;">Target-specific labels, weights, and features</td>
+<td style="text-align: left;"><code>clicks</code>、<code>carts</code>、<code>orders</code></td>
+<td style="text-align: left;">target labels、权重、行为特征</td>
 </tr>
 </tbody>
 </table>
-<p>Recommended event-level table:</p>
+<p>推荐事件级表结构：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>session:int64, aid:int64, ts:int64, type:string, event_idx:int32
 </code></pre></div>
-<h2 id="session-length">Session Length<a class="headerlink" href="#session-length" title="Permanent link">&para;</a></h2>
+<h2 id="session">Session 长度<a class="headerlink" href="#session" title="Permanent link">&para;</a></h2>
 <p><img alt="Session length distribution" src="../assets/figures/eda_session_length_hist.svg" /></p>
 <table>
 <thead>
@@ -1182,13 +1182,13 @@
 </tr>
 </tbody>
 </table>
-<p>Feature implications:</p>
+<p>特征影响：</p>
 <ul>
-<li>Use separate logic for short sessions, where there is little history to rank.</li>
-<li>Keep recent unique session items as a baseline source.</li>
-<li>Cap or batch long sessions in co-visitation and feature jobs to avoid heavy-tail runtime spikes.</li>
+<li>短 session 需要单独逻辑，因为历史行为太少，排序依据不足。</li>
+<li>recent unique session items 应作为第一层 baseline source。</li>
+<li>co-visitation 与特征任务要对超长 session 做截断或分批，避免长尾 runtime spike。</li>
 </ul>
-<h3 id="session-intent-segments">Session Intent Segments<a class="headerlink" href="#session-intent-segments" title="Permanent link">&para;</a></h3>
+<h3 id="session_1">Session 意图分层<a class="headerlink" href="#session_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1216,13 +1216,13 @@
 </tr>
 </tbody>
 </table>
-<p>Interpretation:</p>
+<p>解读：</p>
 <ul>
-<li>Most sessions are click-only, so the model must be strong under weak intent.</li>
-<li>Sessions containing both carts and orders are a minority but are highly valuable for the final metric.</li>
-<li>Intent segmentation should be explicit: short click-only sessions, cart sessions, and purchase-intent sessions should not share the same candidate mix.</li>
+<li>大多数 session 只有 clicks，模型必须能处理弱意图场景。</li>
+<li>同时包含 carts 与 orders 的 session 占比不高，但对最终指标价值很高。</li>
+<li>应显式做 intent segmentation：短 click-only session、cart session、purchase-intent session 不应完全共用同一套候选混合比例。</li>
 </ul>
-<h2 id="behavior-type-distribution">Behavior Type Distribution<a class="headerlink" href="#behavior-type-distribution" title="Permanent link">&para;</a></h2>
+<h2 id="_5">行为类型分布<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><img alt="Event type mix" src="../assets/figures/eda_event_type_mix.svg" /></p>
 <table>
 <thead>
@@ -1257,21 +1257,21 @@
 </tr>
 </tbody>
 </table>
-<p>Feature implications:</p>
+<p>特征影响：</p>
 <ul>
-<li>Optimize and report each target separately; weighted recall can hide target regressions.</li>
-<li>Orders are sparse but high value, so order-oriented candidate sources need explicit coverage checks.</li>
-<li>Event type should be a first-class feature, not a post-hoc display label.</li>
+<li>指标必须按 target 单独汇报，weighted recall 可能掩盖局部退化。</li>
+<li>orders 稀疏但高价值，需要单独检查 order-oriented candidate coverage。</li>
+<li>event type 应是一等特征，而不是事后展示标签。</li>
 </ul>
-<h2 id="session-level-signals">Session-Level Signals<a class="headerlink" href="#session-level-signals" title="Permanent link">&para;</a></h2>
+<h2 id="session_2">Session 级信号<a class="headerlink" href="#session_2" title="Permanent link">&para;</a></h2>
 <p><img alt="Session-level signals" src="../assets/figures/eda_session_signals.svg" /></p>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">split</th>
-<th style="text-align: right;">sessions with carts</th>
-<th style="text-align: right;">sessions with orders</th>
-<th style="text-align: right;">sessions with repeated aid</th>
+<th style="text-align: right;">包含 carts 的 sessions</th>
+<th style="text-align: right;">包含 orders 的 sessions</th>
+<th style="text-align: right;">重复 aid sessions</th>
 <th style="text-align: right;">mean unique aids/session</th>
 <th style="text-align: right;">p50 duration sec</th>
 <th style="text-align: right;">p95 duration sec</th>
@@ -1298,13 +1298,13 @@
 </tr>
 </tbody>
 </table>
-<p>Feature implications:</p>
+<p>特征影响：</p>
 <ul>
-<li>Repeated-aid behavior supports count, recency, and last-seen-position features.</li>
-<li>Cart/order presence can define session intent segments.</li>
-<li>Session duration and time gaps are natural features for separating quick browsing from deliberate purchase sessions.</li>
+<li>repeated-aid 行为支持 count、recency、last-seen-position 特征。</li>
+<li>carts/orders presence 可用于定义 session intent segment。</li>
+<li>session duration 与 time gap 可帮助区分快速浏览和深度购买意图。</li>
 </ul>
-<h3 id="first-and-last-event-types">First and Last Event Types<a class="headerlink" href="#first-and-last-event-types" title="Permanent link">&para;</a></h3>
+<h3 id="_6">首尾事件类型<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1335,16 +1335,16 @@
 </tr>
 </tbody>
 </table>
-<p>Interpretation:</p>
+<p>解读：</p>
 <ul>
-<li>The first event is almost always a click, so early-session features mostly describe browsing context.</li>
-<li>Last-event type is more informative: a cart or order near the end is a strong intent signal.</li>
-<li>Candidate scoring should include last event type, last item id, and last event recency.</li>
+<li>首事件几乎总是 click，早期特征主要描述浏览上下文。</li>
+<li>末事件类型更有信息量：session 末尾出现 cart/order 是强意图信号。</li>
+<li>candidate scoring 应包含 last event type、last item id、last event recency。</li>
 </ul>
-<h2 id="temporal-structure">Temporal Structure<a class="headerlink" href="#temporal-structure" title="Permanent link">&para;</a></h2>
+<h2 id="_7">时间结构<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><img alt="Daily event volume" src="../assets/figures/eda_daily_event_volume.svg" /></p>
-<p>Train and test are chronological neighbors. This makes random validation inappropriate: it can leak future popularity and overstate generalization. The local validation split should mimic the test-time condition with a recent validation window and future labels.</p>
-<h2 id="item-popularity-and-long-tail">Item Popularity and Long Tail<a class="headerlink" href="#item-popularity-and-long-tail" title="Permanent link">&para;</a></h2>
+<p>train 与 test 是时间相邻窗口。这意味着随机验证不合适：它会泄漏未来热度，并高估模型泛化能力。本地验证应使用最近时间窗口，并把未来事件作为 label。</p>
+<h2 id="item-popularity">Item Popularity 与长尾<a class="headerlink" href="#item-popularity" title="Permanent link">&para;</a></h2>
 <p><img alt="Item popularity long tail" src="../assets/figures/eda_item_popularity_loglog.svg" /></p>
 <table>
 <thead>
@@ -1413,11 +1413,11 @@
 </tr>
 </tbody>
 </table>
-<p>Feature implications:</p>
+<p>特征影响：</p>
 <ul>
-<li>Popularity and co-visitation are viable because most test interactions involve items observed in train.</li>
-<li>Cold or rare items still need fallback handling, especially for long-tail coverage and candidate diversity.</li>
-<li>Recent popularity should be compared against global popularity because top items drift over time.</li>
+<li>popularity 与 co-visitation 可行，因为 test 交互 item 都在 train 里出现过。</li>
+<li>rare item 仍需 fallback，尤其影响长尾覆盖与候选多样性。</li>
+<li>recent popularity 应与 global popularity 对比，因为热门 item 会随时间漂移。</li>
 </ul>
 <h3 id="target-specific-top-items">Target-Specific Top Items<a class="headerlink" href="#target-specific-top-items" title="Permanent link">&para;</a></h3>
 <table>
@@ -1446,16 +1446,16 @@
 </tr>
 </tbody>
 </table>
-<p>Interpretation:</p>
+<p>解读：</p>
 <ul>
-<li>Click/cart/order popularity lists differ, especially for orders.</li>
-<li>A single global popularity fallback is too blunt; each target should have its own fallback list.</li>
-<li>Recent target-specific popularity should be benchmarked against full-train target popularity.</li>
+<li>clicks/carts/orders 的热门 item 列表不同，orders 尤其明显。</li>
+<li>单一 global popularity fallback 太粗，应为每个 target 维护 fallback list。</li>
+<li>recent target-specific popularity 需要与 full-train target popularity 做基准对比。</li>
 </ul>
-<h2 id="sequence-behavior">Sequence Behavior<a class="headerlink" href="#sequence-behavior" title="Permanent link">&para;</a></h2>
+<h2 id="_8">序列行为<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p><img alt="Event type transition heatmap" src="../assets/figures/eda_type_transition_heatmap.svg" /></p>
 <p><img alt="Event type by relative position" src="../assets/figures/eda_type_position_deciles.svg" /></p>
-<h3 id="conditional-event-type-transitions">Conditional Event-Type Transitions<a class="headerlink" href="#conditional-event-type-transitions" title="Permanent link">&para;</a></h3>
+<h3 id="_9">行为类型条件转移<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1480,7 +1480,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="relative-position-of-orders">Relative Position of Orders<a class="headerlink" href="#relative-position-of-orders" title="Permanent link">&para;</a></h3>
+<h3 id="orders">Orders 相对位置<a class="headerlink" href="#orders" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1502,97 +1502,97 @@
 </tr>
 </tbody>
 </table>
-<p>Feature implications:</p>
+<p>特征影响：</p>
 <ul>
-<li>Transition counts motivate type-aware co-visitation matrices such as click-to-cart and cart-to-order.</li>
-<li>Relative event position can become a feature: the last few events often deserve more weight than early-session noise.</li>
-<li>Separate first-event and last-event type distributions help design session-intent features.</li>
-<li>Orders are concentrated near the end of sessions, so order candidates should emphasize late events more aggressively than click candidates.</li>
+<li>转移统计支持 type-aware co-visitation，例如 click-to-cart、cart-to-order。</li>
+<li>相对位置可作为特征：最后几个事件通常比早期浏览噪声更重要。</li>
+<li>首尾 event type 分布有助于构建 session-intent features。</li>
+<li>orders 集中在 session 后段，order candidate 应比 click candidate 更强调 late events。</li>
 </ul>
-<h2 id="insight-to-experiment-map">Insight to Experiment Map<a class="headerlink" href="#insight-to-experiment-map" title="Permanent link">&para;</a></h2>
+<h2 id="_10">洞察到实验的映射<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Insight</th>
-<th style="text-align: left;">Evidence</th>
-<th style="text-align: left;">Feature or method hypothesis</th>
-<th style="text-align: left;">Experiment</th>
+<th style="text-align: left;">洞察</th>
+<th style="text-align: left;">证据</th>
+<th style="text-align: left;">特征或方法假设</th>
+<th style="text-align: left;">实验</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Short test sessions need robust fallback</td>
-<td style="text-align: left;">Test session length is much shorter than train</td>
-<td style="text-align: left;">Combine session history with type-specific popularity fallback</td>
+<td style="text-align: left;">短 test session 需要可靠 fallback</td>
+<td style="text-align: left;">test session length 明显短于 train</td>
+<td style="text-align: left;">session history + target-specific popularity fallback</td>
 <td style="text-align: left;"><code>B000</code>, <code>B001</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Repeated items are strong session signals</td>
-<td style="text-align: left;">Large share of sessions repeat an <code>aid</code></td>
-<td style="text-align: left;">Use recent unique aids, aid frequency in session, and last-seen position</td>
+<td style="text-align: left;">重复 item 是强 session 信号</td>
+<td style="text-align: left;">大量 session 重复出现同一 <code>aid</code></td>
+<td style="text-align: left;">recent unique aids、session 内频次、last-seen position</td>
 <td style="text-align: left;"><code>B001_session_history_baseline</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Orders are sparse but high weight</td>
-<td style="text-align: left;">Order ratio is low; metric weight is 0.60</td>
-<td style="text-align: left;">Build order-specific candidates and features</td>
+<td style="text-align: left;">orders 稀疏但权重高</td>
+<td style="text-align: left;">order ratio 低，metric weight 为 0.60</td>
+<td style="text-align: left;">构建 order-specific candidates 与 features</td>
 <td style="text-align: left;"><code>C000_target_candidates</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Popularity is long-tailed</td>
-<td style="text-align: left;">High Gini and many low-frequency aids</td>
-<td style="text-align: left;">Use popularity fallback, but measure coverage by session length and tail bucket</td>
+<td style="text-align: left;">popularity 长尾明显</td>
+<td style="text-align: left;">Gini 高，低频 item 多</td>
+<td style="text-align: left;">使用 popularity fallback，但按 session length 与 tail bucket 评估 coverage</td>
 <td style="text-align: left;"><code>B000_popularity_baseline</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Time order matters</td>
-<td style="text-align: left;">Train/test are sequential</td>
-<td style="text-align: left;">Use chronological validation and recent-window features</td>
+<td style="text-align: left;">时间顺序重要</td>
+<td style="text-align: left;">train/test 时间连续</td>
+<td style="text-align: left;">使用 chronological validation 与 recent-window features</td>
 <td style="text-align: left;"><code>V000_time_split</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Type transitions carry intent</td>
-<td style="text-align: left;">Click/cart/order transitions are asymmetric</td>
-<td style="text-align: left;">Build type-aware co-visitation and transition features</td>
+<td style="text-align: left;">type transitions 携带意图</td>
+<td style="text-align: left;">click/cart/order 转移不对称</td>
+<td style="text-align: left;">构建 type-aware co-visitation 与 transition features</td>
 <td style="text-align: left;"><code>C000_covisit_baseline</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Orders are late-session events</td>
-<td style="text-align: left;">54.66% of train orders and 73.75% of test orders appear in the final 30% of the session</td>
-<td style="text-align: left;">Add position-aware and recency-weighted order features</td>
+<td style="text-align: left;">orders 多发生在后段</td>
+<td style="text-align: left;">train 54.66%、test 73.75% 的 order 位于 session 最后 30%</td>
+<td style="text-align: left;">增加 position-aware 与 recency-weighted order features</td>
 <td style="text-align: left;"><code>F000_session_item_features</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Popularity differs by target</td>
-<td style="text-align: left;">Top order aids differ from top click/cart aids</td>
-<td style="text-align: left;">Maintain target-specific popularity and candidate pools</td>
+<td style="text-align: left;">不同 target 热门 item 不同</td>
+<td style="text-align: left;">top order aids 与 top click/cart aids 明显不同</td>
+<td style="text-align: left;">维护 target-specific popularity 与 candidate pools</td>
 <td style="text-align: left;"><code>B000_popularity_baseline</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="generated-artifacts">Generated Artifacts<a class="headerlink" href="#generated-artifacts" title="Permanent link">&para;</a></h2>
+<h2 id="_11">生成产物<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Artifact</th>
-<th style="text-align: left;">Path</th>
+<th style="text-align: left;">产物</th>
+<th style="text-align: left;">路径</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Full summary JSON</td>
+<td style="text-align: left;">全量摘要 JSON</td>
 <td style="text-align: left;"><code>reports/eda/full_eda_summary.json</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Split summary CSV</td>
+<td style="text-align: left;">split summary CSV</td>
 <td style="text-align: left;"><code>reports/eda/split_summary.csv</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Top aids CSV</td>
+<td style="text-align: left;">top aids CSV</td>
 <td style="text-align: left;"><code>reports/eda/top_aids_by_split.csv</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">EDA figures</td>
+<td style="text-align: left;">EDA 图表</td>
 <td style="text-align: left;"><code>site/assets/figures/*.svg</code></td>
 </tr>
 </tbody>
