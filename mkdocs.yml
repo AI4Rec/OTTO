@@ -61,6 +61,13 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
 
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js
+  - assets/javascripts/eda_charts.js
+
 extra:
   social:
     - icon: fontawesome/brands/github
