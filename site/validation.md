@@ -7,7 +7,7 @@
 ## 切分方案
 
 ```text
-raw train sessions
+原始训练会话
   -> 按时间排序或筛选
   -> 选择最近一段作为 validation window
   -> 将每个 session 切成 input prefix 与 future labels

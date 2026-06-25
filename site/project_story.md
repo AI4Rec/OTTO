@@ -1,5 +1,17 @@
 # 项目讲述
 
+<section class="story-hero">
+  <div class="story-hero__eyebrow">项目讲述</div>
+  <h1>一个可复现的会话推荐系统复盘</h1>
+  <p class="story-hero__summary">本页用于沉淀最终项目案例：从 OTTO 的三目标推荐任务出发，说明数据理解、验证体系、候选召回、排序建模和工程取舍。当前处于框架阶段，后续会随着基线、共访召回与排序实验逐步填入结果。</p>
+  <div class="story-metrics">
+    <div class="story-metric"><b>216.7M</b><span>训练事件数</span></div>
+    <div class="story-metric"><b>12.9M</b><span>训练会话数</span></div>
+    <div class="story-metric"><b>0.60</b><span>orders 指标权重</span></div>
+    <div class="story-metric"><b>8.29</b><span>测试平均长度</span></div>
+  </div>
+</section>
+
 状态：计划中
 
 当验证、基线、候选召回和排序实验完成后，本页会整理成最终项目案例。目标是能清楚说明：问题是什么、为什么这样建模、每一步如何验证、哪些方法有效、哪些权衡最重要。

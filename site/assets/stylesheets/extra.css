@@ -1,10 +1,93 @@
+.otto-ui {
+  --otto-bg: #f7f8fb;
+  --otto-panel: #ffffff;
+  --otto-ink: #172033;
+  --otto-muted: #667085;
+  --otto-line: #d9dee8;
+  --otto-soft-line: #edf0f5;
+  --otto-blue: #2563eb;
+  --otto-teal: #0f766e;
+  --otto-amber: #d97706;
+  --otto-red: #dc2626;
+}
+
+.otto-ui .md-header {
+  box-shadow: none;
+  border-bottom: 1px solid var(--otto-line);
+}
+
+.otto-ui .md-tabs {
+  border-bottom: 1px solid var(--otto-soft-line);
+}
+
+.otto-ui .md-main {
+  background:
+    linear-gradient(180deg, rgba(247, 248, 251, 0.96), rgba(255, 255, 255, 1) 260px);
+}
+
+.otto-ui .md-main__inner {
+  margin-top: 0;
+}
+
+.otto-ui .md-content__inner {
+  padding-top: 2rem;
+}
+
+.otto-ui .md-typeset {
+  color: var(--otto-ink);
+}
+
+.otto-ui .md-typeset h1 {
+  margin-bottom: 0.7rem;
+  color: var(--otto-ink);
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.otto-ui .md-typeset h2 {
+  margin-top: 2.1rem;
+  padding-top: 0.15rem;
+  border-top: 1px solid var(--otto-soft-line);
+  color: var(--otto-ink);
+  font-weight: 720;
+  letter-spacing: 0;
+}
+
+.otto-ui .md-typeset h3 {
+  color: var(--otto-ink);
+  font-weight: 680;
+}
+
+.otto-ui .md-typeset p,
+.otto-ui .md-typeset li {
+  line-height: 1.75;
+}
+
+.otto-ui .md-typeset table:not([class]) {
+  font-size: 0.72rem;
+}
+
+.otto-ui .md-typeset table:not([class]) th {
+  color: var(--otto-muted);
+  font-weight: 680;
+}
+
+.otto-ui .md-typeset table:not([class]) th,
+.otto-ui .md-typeset table:not([class]) td {
+  border-color: var(--otto-soft-line);
+}
+
+.otto-ui .md-typeset code {
+  border-radius: 5px;
+}
+
 .eda-chart {
   width: 100%;
   min-height: 430px;
-  margin: 1rem 0 1.25rem;
-  border: 1px solid var(--md-default-fg-color--lightest);
+  margin: 1.1rem 0 1.25rem;
+  border: 1px solid var(--otto-line);
   border-radius: 8px;
-  background: var(--md-default-bg-color);
+  background: var(--otto-panel);
 }
 
 .eda-chart--wide {
@@ -14,7 +97,186 @@
 .eda-chart-takeaway {
   margin-top: -0.5rem;
   margin-bottom: 1.25rem;
-  color: var(--md-default-fg-color);
+  color: var(--otto-ink);
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.otto-page-data-eda .md-content__inner {
+  max-width: 1140px;
+}
+
+.otto-page-data-eda .md-typeset {
+  font-size: 0.82rem;
+}
+
+.otto-page-data-eda .md-typeset h1 {
+  max-width: 820px;
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  font-size: 2.15rem;
+  line-height: 1.12;
+}
+
+.otto-page-data-eda .md-typeset h2 {
+  border-top-color: #ded7ca;
+}
+
+.otto-page-data-eda .md-typeset > p:first-of-type {
+  max-width: 820px;
+  color: #334155;
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+}
+
+.otto-page-data-eda .eda-chart {
+  border-color: #ded7ca;
+  border-radius: 4px;
+  background: #fffdf8;
+}
+
+.otto-page-data-eda .eda-chart-takeaway {
+  border-left: 3px solid var(--otto-blue);
+  padding-left: 0.75rem;
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+}
+
+.otto-page-experiments .md-content__inner {
+  max-width: 1040px;
+}
+
+.otto-page-experiments .md-typeset h1 {
+  font-size: 1.9rem;
+}
+
+.otto-page-experiments .md-typeset h2 {
+  margin-top: 1.7rem;
+}
+
+.otto-page-experiments .md-typeset table:not([class]) {
+  overflow: hidden;
+  border: 1px solid var(--otto-line);
+  border-radius: 8px;
+  background: var(--otto-panel);
+}
+
+.otto-page-experiments .md-typeset table:not([class]) tbody tr:hover {
+  background: #f8fafc;
+}
+
+.otto-page-experiments .md-typeset table:not([class]) td:first-child {
+  color: var(--otto-blue);
+  font-weight: 700;
+}
+
+.otto-page-project-story .md-main {
+  background: #0b1020;
+}
+
+.otto-page-project-story .md-content__inner {
+  max-width: 1080px;
+  color: #e8eef8;
+}
+
+.otto-page-project-story .md-typeset {
+  color: #e8eef8;
+}
+
+.otto-page-project-story .md-typeset h1,
+.otto-page-project-story .md-typeset h2,
+.otto-page-project-story .md-typeset h3 {
+  color: #f8fbff;
+}
+
+.otto-page-project-story .md-typeset h1 {
+  max-width: 760px;
+  font-size: 2.35rem;
+  line-height: 1.08;
+}
+
+.otto-page-project-story .md-typeset h2 {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+.otto-page-project-story .md-typeset p,
+.otto-page-project-story .md-typeset li {
+  color: #c3cee2;
+}
+
+.otto-page-project-story .md-typeset table:not([class]) {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.otto-page-project-story .md-typeset table:not([class]) th,
+.otto-page-project-story .md-typeset table:not([class]) td {
+  border-color: rgba(255, 255, 255, 0.13);
+  color: #e8eef8;
+}
+
+.otto-page-project-story .md-typeset table:not([class]) th {
+  color: #9fb0ca;
+}
+
+.story-hero {
+  margin: -0.4rem 0 2.2rem;
+  padding: 2.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.035));
+}
+
+.story-hero__eyebrow {
+  color: #8fb4ff;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.story-hero__summary {
+  max-width: 780px;
+  color: #c3cee2;
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.story-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.story-metric {
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.story-metric b {
+  display: block;
+  color: #f8fbff;
+  font-size: 1.15rem;
+}
+
+.story-metric span {
+  color: #9fb0ca;
+  font-size: 0.66rem;
+}
+
+@media screen and (max-width: 760px) {
+  .otto-ui .md-content__inner {
+    padding-top: 1.2rem;
+  }
+
+  .otto-page-data-eda .md-typeset h1,
+  .otto-page-project-story .md-typeset h1 {
+    font-size: 1.75rem;
+  }
+
+  .story-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
 }
