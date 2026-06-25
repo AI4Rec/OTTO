@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "north_star": "weighted Recall@20",
+    "best_run": "Formal Score Pending",
+    "current_phase": "V000 Validation Gate",
+    "scored_runs": 0,
+    "updated_at": "2026-06-25"
+  },
+  "objective": {
+    "components": [
+      {
+        "name": "clicks",
+        "metric": "recall_clicks@20",
+        "weight": 0.1,
+        "priority": "support"
+      },
+      {
+        "name": "carts",
+        "metric": "recall_carts@20",
+        "weight": 0.3,
+        "priority": "bridge"
+      },
+      {
+        "name": "orders",
+        "metric": "recall_orders@20",
+        "weight": 0.6,
+        "priority": "primary"
+      }
+    ]
+  },
+  "experiment_history": [
+    {
+      "run_id": "V000",
+      "label": "Time Split",
+      "stage": "validation",
+      "status": "planned",
+      "weighted": null,
+      "delta": null,
+      "clicks": null,
+      "carts": null,
+      "orders": null,
+      "decision": "先完成可信本地闭环"
+    },
+    {
+      "run_id": "B000",
+      "label": "Popularity",
+      "stage": "baseline",
+      "status": "planned",
+      "weighted": null,
+      "delta": null,
+      "clicks": null,
+      "carts": null,
+      "orders": null,
+      "decision": "建立首个可比较基线"
+    },
+    {
+      "run_id": "B001",
+      "label": "Session History",
+      "stage": "baseline",
+      "status": "planned",
+      "weighted": null,
+      "delta": null,
+      "clicks": null,
+      "carts": null,
+      "orders": null,
+      "decision": "验证 recent unique history 的提升幅度"
+    },
+    {
+      "run_id": "C000",
+      "label": "Co-visitation",
+      "stage": "candidate",
+      "status": "planned",
+      "weighted": null,
+      "delta": null,
+      "clicks": null,
+      "carts": null,
+      "orders": null,
+      "decision": "重点观察 carts/orders recall 提升"
+    }
+  ],
+  "stage_gates": [
+    {
+      "id": "V000",
+      "title": "时间切分与标签",
+      "status": "planned",
+      "detail": "先建立可信涨跌口径。",
+      "href": "validation/"
+    },
+    {
+      "id": "B000",
+      "title": "Popularity Baseline",
+      "status": "planned",
+      "detail": "先拿到第一条正式 weighted@20 曲线。",
+      "href": "experiments/"
+    },
+    {
+      "id": "B001",
+      "title": "Session History Baseline",
+      "status": "planned",
+      "detail": "验证 recent history 是否是主力候选源。",
+      "href": "experiments/"
+    },
+    {
+      "id": "C000",
+      "title": "Co-visitation Candidate",
+      "status": "planned",
+      "detail": "重点验证 carts/orders 的召回增益。",
+      "href": "methods/"
+    }
+  ],
+  "ledger": [
+    {
+      "id": "A000",
+      "stage": "analysis",
+      "status": "done",
+      "metric": "EDA artifacts",
+      "best": "EDA artifacts",
+      "decision": "驱动 V000 / B000 / B001 / C000",
+      "href": "data_eda/"
+    },
+    {
+      "id": "V000",
+      "stage": "validation",
+      "status": "planned",
+      "metric": "weighted Recall@20 sanity",
+      "best": "待回填",
+      "decision": "先闭环，再对比分数",
+      "href": "validation/"
+    },
+    {
+      "id": "B000",
+      "stage": "baseline",
+      "status": "planned",
+      "metric": "weighted Recall@20",
+      "best": "待回填",
+      "decision": "建立首个正式基线",
+      "href": "experiments/"
+    },
+    {
+      "id": "B001",
+      "stage": "baseline",
+      "status": "planned",
+      "metric": "weighted Recall@20",
+      "best": "待回填",
+      "decision": "验证 session-history 的绝对提升",
+      "href": "experiments/"
+    },
+    {
+      "id": "C000",
+      "stage": "candidate",
+      "status": "planned",
+      "metric": "candidate recall / weighted Recall@20",
+      "best": "待回填",
+      "decision": "聚焦 carts/orders 提升",
+      "href": "methods/"
+    }
+  ],
+  "judgements": [
+    "本项目唯一 KPI 是 weighted Recall@20，任何实验都必须回收到这一指标。",
+    "orders 权重占 0.60，候选召回和排序策略都必须显式向高意图行为倾斜。",
+    "当前主要缺口不是模型复杂度，而是首批正式可比 run 尚未回填。"
+  ],
+  "next_actions": [
+    "完成 V000：时间切分、标签生成、metric sanity check。",
+    "执行 B000：global popularity 与 target-specific popularity 对比。",
+    "执行 B001：recent unique session history，对比 B000 的绝对涨跌。",
+    "补齐实验回填字段：clicks@20、carts@20、orders@20、weighted@20、delta_vs_prev。"
+  ]
+}
