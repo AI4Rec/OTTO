@@ -1,3 +1,3 @@
 dataset_id	path	kind	source	parent_id	created_at	rows	bytes	checksum	status	notes
-D000_kaggle_official_raw	data/raw/recsys-dataset.zip	raw_zip	kaggle:otto/recsys-dataset		2026-06-24	14571582	2127848819		available	Official full raw archive; contains train/test JSONL; train 12899779 sessions, test 1671803 sessions.
-D000_test_jsonl_zip	data/raw/otto-recsys-test.jsonl.zip	raw_zip	kaggle:otto/recsys-dataset		2026-06-24		122M		available	Small-file access check.
+D000_kaggle_official_raw	data/raw/recsys-dataset.zip	raw_zip	kaggle:otto/recsys-dataset		2026-06-24	14571582	2127848819		available	官方完整原始压缩包，包含 train/test JSONL；train 12899779 sessions，test 1671803 sessions。
+D000_test_jsonl_zip	data/raw/otto-recsys-test.jsonl.zip	raw_zip	kaggle:otto/recsys-dataset		2026-06-24		122M		available	小文件访问检查产物。

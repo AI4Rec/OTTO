@@ -1,36 +1,36 @@
-# Project Story Card
+# 项目讲述卡片
 
-## One-Sentence Summary
+## 一句话摘要
 
  
 
-## Problem
+## 问题
 
-- Task:
-- Users/items/signals:
-- Metric:
-- Constraints:
+- 任务：
+- 用户、商品和信号：
+- 指标：
+- 约束：
 
-## System Design
+## 系统设计
 
 ```text
 Data -> Validation -> Candidates -> Features -> Ranker -> Top-20 output
 ```
 
-## Key Results
+## 关键结果
 
-| Stage | Metric | Result | Evidence |
+| 阶段 | 指标 | 结果 | 证据 |
 | :-- | :-- | --: | :-- |
 | Baseline | weighted_recall20 |  |  |
 | Candidate generation | candidate_recall@K |  |  |
 | Ranking | weighted_recall20 |  |  |
 
-## Technical Decisions
+## 技术决策
 
-| Decision | Why | Tradeoff |
+| 决策 | 原因 | 取舍 |
 | :-- | :-- | :-- |
 |  |  |  |
 
-## Lessons
+## 复盘
 
 - 

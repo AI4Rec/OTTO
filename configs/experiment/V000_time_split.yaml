@@ -1,6 +1,6 @@
 experiment_id: V000_time_split
 stage: validation
-description: Chronological validation split for local weighted Recall@20.
+description: 用于本地 weighted Recall@20 的 chronological validation split。
 data:
   dataset_id: D000_kaggle_official_raw
 inputs:

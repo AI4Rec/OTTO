@@ -1,27 +1,27 @@
 # <EXPERIMENT_ID> <TITLE>
 
-## Metadata
+## 元信息
 
-| Field | Value |
+| 字段 | 值 |
 | :-- | :-- |
 | Experiment ID |  |
-| Stage |  |
-| Status | planned / running / succeeded / rejected |
-| Config | `configs/experiment/<EXPERIMENT_ID>.yaml` |
-| Dataset version |  |
-| Split version |  |
+| 阶段 |  |
+| 状态 | 计划中 / 运行中 / 已完成 / 已拒绝 |
+| 配置 | `configs/experiment/<EXPERIMENT_ID>.yaml` |
+| 数据版本 |  |
+| Split 版本 |  |
 
-## Hypothesis
+## 假设
 
-State the expected improvement and the mechanism behind it.
+说明预期改进和背后的机制。
 
 ```text
-If we ..., then ... should improve because ...
+如果我们……，那么……会提升，因为……
 ```
 
-## Method Design
+## 方法设计
 
-Describe the method at the level needed for reproducibility.
+用可复现所需的粒度描述方法。
 
 ```text
 Input sessions
@@ -30,54 +30,54 @@ Input sessions
   -> top-k output
 ```
 
-## Inputs
+## 输入
 
-| Input | Version/path | Notes |
+| 输入 | 版本/路径 | 备注 |
 | :-- | :-- | :-- |
 | Dataset |  |  |
 | Split |  |  |
 | Config |  |  |
 
-## Command
+## 命令
 
 ```bash
 # exact command here
 ```
 
-## Outputs
+## 输出
 
-| Output | Path | Notes |
+| 输出 | 路径 | 备注 |
 | :-- | :-- | :-- |
 | Metrics |  |  |
 | Predictions |  |  |
 | Figures |  |  |
 
-## Metrics
+## 指标
 
-| Metric | Value | Delta vs baseline |
+| 指标 | 数值 | 相比 baseline 变化 |
 | :-- | --: | --: |
 | clicks_recall20 |  |  |
 | carts_recall20 |  |  |
 | orders_recall20 |  |  |
 | weighted_recall20 |  |  |
 
-## Diagnostics
+## 诊断
 
-| Diagnostic | Result | Interpretation |
+| 诊断 | 结果 | 解读 |
 | :-- | :-- | :-- |
 | Candidate recall by target |  |  |
 | Coverage by session length |  |  |
 | Runtime |  |  |
 | Memory |  |  |
 
-## Decision
+## 决策
 
-Adopt / reject / keep for later.
+采用 / 拒绝 / 延后。
 
-Reason:
+原因：
 
 - 
 
-## Next Step
+## 下一步
 
 - [ ] 

@@ -537,8 +537,8 @@ def transition_heatmap(path: Path, summary: dict, split: str = "train") -> None:
         parts.append(f'<text x="{left-16}" y="{top+i*cell+cell/2+4}" class="label" text-anchor="end">{source}</text>')
     for j, target in enumerate(TARGET_TYPES):
         parts.append(f'<text x="{left+j*cell+cell/2}" y="{top-18}" class="label" text-anchor="middle">{target}</text>')
-    parts.append(f'<text x="{left+cell*1.5}" y="{top-56}" class="small" text-anchor="middle">next event type</text>')
-    parts.append(f'<text x="{left-116}" y="{top+cell*1.5}" class="small" transform="rotate(-90 {left-116},{top+cell*1.5})">previous event type</text>')
+    parts.append(f'<text x="{left+cell*1.5}" y="{top-56}" class="small" text-anchor="middle">下一个 event type</text>')
+    parts.append(f'<text x="{left-116}" y="{top+cell*1.5}" class="small" transform="rotate(-90 {left-116},{top+cell*1.5})">上一个 event type</text>')
     for i, source in enumerate(TARGET_TYPES):
         for j, target in enumerate(TARGET_TYPES):
             value = counts.get(f"{source}->{target}", 0)
@@ -561,8 +561,8 @@ def generate_figures(summary: dict, site_fig_dir: Path) -> None:
     labels = ["clicks", "carts", "orders"]
     bar_chart(
         site_fig_dir / "eda_event_type_mix.svg",
-        "Event Type Mix",
-        "Clicks dominate frequency; orders dominate the metric weight.",
+        "行为类型分布",
+        "clicks 占事件频率大头，orders 占指标权重大头。",
         labels,
         {
             split: [splits[split]["type_ratios"][label] for label in labels]
@@ -576,8 +576,8 @@ def generate_figures(summary: dict, site_fig_dir: Path) -> None:
     length_labels = list(dict.fromkeys(length_labels))
     bar_chart(
         site_fig_dir / "eda_session_length_hist.svg",
-        "Session Length Distribution",
-        "The public test split is much shorter than train.",
+        "Session 长度分布",
+        "public test split 明显短于 train。",
         length_labels,
         {
             split: [splits[split]["session_length_hist"].get(label, 0) for label in length_labels]
@@ -586,11 +586,11 @@ def generate_figures(summary: dict, site_fig_dir: Path) -> None:
         SPLIT_COLORS,
     )
 
-    signal_labels = ["has carts", "has orders", "repeated aid"]
+    signal_labels = ["包含 carts", "包含 orders", "重复 aid"]
     bar_chart(
         site_fig_dir / "eda_session_signals.svg",
-        "Session-Level Signals",
-        "Cart/order presence and repeated item behavior by split.",
+        "Session 级信号",
+        "按 split 对比 cart/order presence 与 repeated item behavior。",
         signal_labels,
         {
             split: [
@@ -613,8 +613,8 @@ def generate_figures(summary: dict, site_fig_dir: Path) -> None:
         colors[split] = SPLIT_COLORS[split]
     line_chart(
         site_fig_dir / "eda_daily_event_volume.svg",
-        "Daily Event Volume",
-        "Chronological train/test boundary and event-volume profile.",
+        "每日事件量",
+        "展示 train/test 时间边界与事件量变化。",
         all_dates,
         series,
         colors,
@@ -622,8 +622,8 @@ def generate_figures(summary: dict, site_fig_dir: Path) -> None:
 
     loglog_chart(
         site_fig_dir / "eda_item_popularity_loglog.svg",
-        "Item Popularity Long Tail",
-        "Top item event counts by rank on log-log axes.",
+        "Item popularity 长尾",
+        "用 log-log 坐标展示 top item 事件数排名。",
         {split: splits[split]["popularity"]["top_curve_counts"] for split in splits},
         SPLIT_COLORS,
     )
@@ -638,8 +638,8 @@ def generate_figures(summary: dict, site_fig_dir: Path) -> None:
     }
     bar_chart(
         site_fig_dir / "eda_type_position_deciles.svg",
-        "Event Type by Relative Position",
-        "Where each behavior type appears inside train sessions.",
+        "行为类型相对位置",
+        "展示各行为类型在 train session 中的位置。",
         decile_labels,
         {
             target: [
@@ -722,21 +722,21 @@ def build_markdown(summary: dict, figure_dir_relative: str = "assets/figures") -
         )
 
     lines = [
-        "# Data & EDA",
+        "# 数据与 EDA",
         "",
-        "## Executive Summary",
+        "## 一句话结论",
         "",
-        "This page summarizes a full-dataset EDA pass for the Kaggle OTTO session dataset. The analysis treats EDA as scouting for feature engineering: every statistic should either validate the data contract, expose a modeling risk, or suggest a concrete baseline, candidate, feature, or validation decision.",
+        "本页汇总 Kaggle OTTO session 数据集的全量 EDA。这里的 EDA 不只是看分布，而是为后续工程做侦察：每个统计都应该验证字段口径、暴露建模风险，或指向明确的 baseline、candidate、feature、validation 决策。",
         "",
-        "Key findings:",
+        "核心发现：",
         "",
-        "- The task is strongly session-driven: repeated item interactions are common and should be included as a first candidate source.",
-        "- The public test split has much shorter sessions than train, so fallback and short-session strategies are not optional.",
-        "- Clicks dominate event volume, while orders dominate the metric weight; target-specific candidates and ranking are needed.",
-        "- Item popularity is extremely long-tailed, making top-popularity fallback useful but insufficient.",
-        "- Train and test are chronological neighbors; validation should be time-based and should explicitly guard against leakage.",
+        "- 任务强依赖 session 内行为：重复 item 交互非常常见，session history 应作为第一候选源。",
+        "- public test session 明显短于 train，短 session fallback 必须单独设计。",
+        "- clicks 占事件量大头，但 orders 占指标权重大头，需要 target-specific 候选与排序。",
+        "- item popularity 极度长尾，热门 fallback 有价值但远远不够。",
+        "- train/test 是时间相邻窗口，验证必须按时间切分，并显式做泄漏检查。",
         "",
-        "## Full Data Scale",
+        "## 全量数据规模",
         "",
         "| split | sessions | events | unique_aids | min_ts_utc | max_ts_utc |",
         "| :-- | --: | --: | --: | :-- | :-- |",
@@ -748,25 +748,25 @@ def build_markdown(summary: dict, figure_dir_relative: str = "assets/figures") -
 
     lines += [
         "",
-        "## Schema Contract",
+        "## 字段口径",
         "",
-        "| Field | Level | Type | Meaning | Feature-engineering use |",
+        "| 字段 | 粒度 | 类型 | 含义 | 下游用途 |",
         "| :-- | :-- | :-- | :-- | :-- |",
-        "| `session` | session | integer | Anonymous session id | Group key, validation label key, submission key |",
-        "| `events` | session | list | Ordered event sequence | Session history, sequence features |",
-        "| `aid` | event | integer | Item id | Candidate id, item features, co-visitation entity |",
-        "| `ts` | event | integer | Millisecond timestamp | Time split, recency, drift, co-visitation windows |",
-        "| `type` | event | string | `clicks`, `carts`, `orders` | Target-specific labels, weights, and features |",
+        "| `session` | session | integer | 匿名 session id | group key、验证标签 key、submission key |",
+        "| `events` | session | list | 按时间排序的事件序列 | session history、序列特征 |",
+        "| `aid` | event | integer | item id | candidate id、item features、co-visitation entity |",
+        "| `ts` | event | integer | 毫秒级时间戳 | 时间切分、recency、drift、co-visitation window |",
+        "| `type` | event | string | `clicks`、`carts`、`orders` | target labels、权重、行为特征 |",
         "",
-        "Recommended event-level table:",
+        "推荐事件级表结构：",
         "",
         "```text",
         "session:int64, aid:int64, ts:int64, type:string, event_idx:int32",
         "```",
         "",
-        "## Session Length",
+        "## Session 长度",
         "",
-        f"![Session length distribution]({figure_dir_relative}/eda_session_length_hist.svg)",
+        f"![Session 长度分布]({figure_dir_relative}/eda_session_length_hist.svg)",
         "",
         "| split | mean | p50 | p75 | p90 | p95 | p99 | max |",
         "| :-- | --: | --: | --: | --: | --: | --: | --: |",
@@ -778,15 +778,15 @@ def build_markdown(summary: dict, figure_dir_relative: str = "assets/figures") -
 
     lines += [
         "",
-        "Feature implications:",
+        "特征影响：",
         "",
-        "- Use separate logic for short sessions, where there is little history to rank.",
-        "- Keep recent unique session items as a baseline source.",
-        "- Cap or batch long sessions in co-visitation and feature jobs to avoid heavy-tail runtime spikes.",
+        "- 短 session 需要单独逻辑，因为历史行为太少，排序依据不足。",
+        "- recent unique session items 应作为第一层 baseline source。",
+        "- co-visitation 与特征任务要对超长 session 做截断或分批，避免长尾 runtime spike。",
         "",
-        "## Behavior Type Distribution",
+        "## 行为类型分布",
         "",
-        f"![Event type mix]({figure_dir_relative}/eda_event_type_mix.svg)",
+        f"![行为类型分布]({figure_dir_relative}/eda_event_type_mix.svg)",
         "",
         "| split | clicks | carts | orders | clicks_ratio | carts_ratio | orders_ratio |",
         "| :-- | --: | --: | --: | --: | --: | --: |",
@@ -798,17 +798,17 @@ def build_markdown(summary: dict, figure_dir_relative: str = "assets/figures") -
 
     lines += [
         "",
-        "Feature implications:",
+        "特征影响：",
         "",
-        "- Optimize and report each target separately; weighted recall can hide target regressions.",
-        "- Orders are sparse but high value, so order-oriented candidate sources need explicit coverage checks.",
-        "- Event type should be a first-class feature, not a post-hoc display label.",
+        "- 指标必须按 target 单独汇报，weighted recall 可能掩盖局部退化。",
+        "- orders 稀疏但高价值，需要单独检查 order-oriented candidate coverage。",
+        "- event type 应是一等特征，而不是事后展示标签。",
         "",
-        "## Session-Level Signals",
+        "## Session 级信号",
         "",
-        f"![Session-level signals]({figure_dir_relative}/eda_session_signals.svg)",
+        f"![Session 级信号]({figure_dir_relative}/eda_session_signals.svg)",
         "",
-        "| split | sessions with carts | sessions with orders | sessions with repeated aid | mean unique aids/session | p50 duration sec | p95 duration sec |",
+        "| split | 包含 carts 的 sessions | 包含 orders 的 sessions | 重复 aid sessions | mean unique aids/session | p50 duration sec | p95 duration sec |",
         "| :-- | --: | --: | --: | --: | --: | --: |",
     ]
     if train:
@@ -818,21 +818,21 @@ def build_markdown(summary: dict, figure_dir_relative: str = "assets/figures") -
 
     lines += [
         "",
-        "Feature implications:",
+        "特征影响：",
         "",
-        "- Repeated-aid behavior supports count, recency, and last-seen-position features.",
-        "- Cart/order presence can define session intent segments.",
-        "- Session duration and time gaps are natural features for separating quick browsing from deliberate purchase sessions.",
+        "- repeated-aid 行为支持 count、recency、last-seen-position 特征。",
+        "- carts/orders presence 可用于定义 session intent segment。",
+        "- session duration 与 time gap 可帮助区分快速浏览和深度购买意图。",
         "",
-        "## Temporal Structure",
+        "## 时间结构",
         "",
-        f"![Daily event volume]({figure_dir_relative}/eda_daily_event_volume.svg)",
+        f"![每日事件量]({figure_dir_relative}/eda_daily_event_volume.svg)",
         "",
-        "Train and test are chronological neighbors. This makes random validation inappropriate: it can leak future popularity and overstate generalization. The local validation split should mimic the test-time condition with a recent validation window and future labels.",
+        "train 与 test 是时间相邻窗口。这意味着随机验证不合适：它会泄漏未来热度，并高估模型泛化能力。本地验证应使用最近时间窗口，并把未来事件作为 label。",
         "",
-        "## Item Popularity and Long Tail",
+        "## Item Popularity 与长尾",
         "",
-        f"![Item popularity long tail]({figure_dir_relative}/eda_item_popularity_loglog.svg)",
+        f"![Item popularity 长尾]({figure_dir_relative}/eda_item_popularity_loglog.svg)",
         "",
         "| split | unique aids | gini | top20 share | top100 share | top1000 share | one-event aid ratio | <=10-event aid ratio |",
         "| :-- | --: | --: | --: | --: | --: | --: | --: |",
@@ -860,46 +860,46 @@ def build_markdown(summary: dict, figure_dir_relative: str = "assets/figures") -
             f"| top100 train/test aid overlap | {cross['top_overlap']['top_100_intersection']} |",
             f"| top100 train/test Jaccard | {cross['top_overlap']['top_100_jaccard']:.4f} |",
             "",
-            "Feature implications:",
+            "特征影响：",
             "",
-            "- Popularity and co-visitation are viable because most test interactions involve items observed in train.",
-            "- Cold or rare items still need fallback handling, especially for long-tail coverage and candidate diversity.",
-            "- Recent popularity should be compared against global popularity because top items drift over time.",
+            "- popularity 与 co-visitation 可行，因为 test 交互 item 都在 train 里出现过。",
+            "- rare item 仍需 fallback，尤其影响长尾覆盖与候选多样性。",
+            "- recent popularity 应与 global popularity 对比，因为热门 item 会随时间漂移。",
         ]
 
     lines += [
         "",
-        "## Sequence Behavior",
+        "## 序列行为",
         "",
-        f"![Event type transition heatmap]({figure_dir_relative}/eda_type_transition_heatmap.svg)",
+        f"![行为类型转移热力图]({figure_dir_relative}/eda_type_transition_heatmap.svg)",
         "",
-        f"![Event type by relative position]({figure_dir_relative}/eda_type_position_deciles.svg)",
+        f"![行为类型相对位置]({figure_dir_relative}/eda_type_position_deciles.svg)",
         "",
-        "Feature implications:",
+        "特征影响：",
         "",
-        "- Transition counts motivate type-aware co-visitation matrices such as click-to-cart and cart-to-order.",
-        "- Relative event position can become a feature: the last few events often deserve more weight than early-session noise.",
-        "- Separate first-event and last-event type distributions help design session-intent features.",
+        "- 转移统计支持 type-aware co-visitation，例如 click-to-cart 与 cart-to-order。",
+        "- 相对位置可作为特征：最后几个事件通常比早期浏览噪声更重要。",
+        "- 首尾 event type 分布有助于构建 session-intent features。",
         "",
-        "## Insight to Experiment Map",
+        "## 洞察到实验的映射",
         "",
-        "| Insight | Evidence | Feature or method hypothesis | Experiment |",
+        "| 洞察 | 证据 | 特征或方法假设 | 实验 |",
         "| :-- | :-- | :-- | :-- |",
-        "| Short test sessions need robust fallback | Test session length is much shorter than train | Combine session history with type-specific popularity fallback | `B000`, `B001` |",
-        "| Repeated items are strong session signals | Large share of sessions repeat an `aid` | Use recent unique aids, aid frequency in session, and last-seen position | `B001_session_history_baseline` |",
-        "| Orders are sparse but high weight | Order ratio is low; metric weight is 0.60 | Build order-specific candidates and features | `C000_target_candidates` |",
-        "| Popularity is long-tailed | High Gini and many low-frequency aids | Use popularity fallback, but measure coverage by session length and tail bucket | `B000_popularity_baseline` |",
-        "| Time order matters | Train/test are sequential | Use chronological validation and recent-window features | `V000_time_split` |",
-        "| Type transitions carry intent | Click/cart/order transitions are asymmetric | Build type-aware co-visitation and transition features | `C000_covisit_baseline` |",
+        "| 短 test session 需要可靠 fallback | test session length 明显短于 train | session history + target-specific popularity fallback | `B000`, `B001` |",
+        "| 重复 item 是强 session 信号 | 大量 session 重复出现同一 `aid` | recent unique aids、session 内频次、last-seen position | `B001_session_history_baseline` |",
+        "| orders 稀疏但权重高 | order ratio 低，metric weight 为 0.60 | 构建 order-specific candidates 与 features | `C000_target_candidates` |",
+        "| popularity 长尾明显 | Gini 高，低频 item 多 | 使用 popularity fallback，但按 session length 与 tail bucket 评估 coverage | `B000_popularity_baseline` |",
+        "| 时间顺序重要 | train/test 时间连续 | 使用 chronological validation 与 recent-window features | `V000_time_split` |",
+        "| type transitions 携带意图 | click/cart/order 转移不对称 | 构建 type-aware co-visitation 与 transition features | `C000_covisit_baseline` |",
         "",
-        "## Generated Artifacts",
+        "## 生成产物",
         "",
-        "| Artifact | Path |",
+        "| 产物 | 路径 |",
         "| :-- | :-- |",
-        "| Full summary JSON | `reports/eda/full_eda_summary.json` |",
-        "| Split summary CSV | `reports/eda/split_summary.csv` |",
-        "| Top aids CSV | `reports/eda/top_aids_by_split.csv` |",
-        "| EDA figures | `site/assets/figures/*.svg` |",
+        "| 全量摘要 JSON | `reports/eda/full_eda_summary.json` |",
+        "| split summary CSV | `reports/eda/split_summary.csv` |",
+        "| top aids CSV | `reports/eda/top_aids_by_split.csv` |",
+        "| EDA 图表 | `site/assets/figures/*.svg` |",
     ]
     return "\n".join(lines) + "\n"
 

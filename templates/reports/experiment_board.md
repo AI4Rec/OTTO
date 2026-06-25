@@ -1,5 +1,5 @@
-# Experiment Board Template
+# 实验看板
 
-| ID | Stage | Hypothesis | Metric | Status | Decision |
-| :-- | :-- | :-- | :-- | :-- | :-- |
-|  |  |  |  |  |  |
+| ID | 阶段 | 假设 | 主指标 | 状态 | 决策 | 卡片 |
+| :-- | :-- | :-- | :-- | :-- | :-- | :-- |
+|  |  |  |  |  |  |  |

@@ -1,49 +1,52 @@
-# E000 Smoke Download
+# E000_smoke_download 数据访问冒烟检查
 
-## Basic Information
+## 元信息
 
-| Field | Value |
+| 字段 | 值 |
 | :-- | :-- |
 | Experiment ID | E000_smoke_download |
-| Stage | Data access |
-| Status | succeeded |
-| Config | `configs/experiment/E000_smoke_download.yaml` |
+| 阶段 | data_access |
+| 状态 | 已完成 |
+| 配置 | `configs/experiment/E000_smoke_download.yaml` |
+| 数据版本 | Kaggle `otto/recsys-dataset` |
+| Split 版本 | 不适用 |
 
-## Hypothesis
+## 假设
 
-The Kaggle OTTO dataset can be downloaded into the standard local data directory and at least one JSONL member can be parsed into the expected session schema.
+如果 Kaggle dataset 能下载到标准目录，并能解析其中的 JSONL 成员，那么后续 EDA、验证和 baseline 可以共用同一套数据入口。
 
-## Design
+## 方法设计
 
 ```text
-Kaggle dataset
+Kaggle dataset archive
   -> data/raw/
-  -> inspect archive members
-  -> stream one JSONL row
-  -> validate session/events/aid/ts/type fields
+  -> inspect zip members
+  -> parse a small JSONL sample
+  -> confirm session/events schema
 ```
 
-## Inputs
+## 输入
 
-| Input | Value |
-| :-- | :-- |
-| Dataset | `kaggle:otto/recsys-dataset` |
-| Sample member | `otto-recsys-test.jsonl` |
+| 输入 | 版本/路径 | 备注 |
+| :-- | :-- | :-- |
+| Kaggle dataset | `otto/recsys-dataset` | 官方公开数据源 |
+| Raw directory | `data/raw/` | 本地目录，不进入 git |
+| Config | `configs/experiment/E000_smoke_download.yaml` | 冒烟检查配置 |
 
-## Command
+## 命令
 
 ```bash
 kaggle datasets download -d otto/recsys-dataset -p data/raw
 ```
 
-## Outputs
+## 输出
 
-| Output | Value |
+| 输出 | 结果 |
 | :-- | :-- |
-| Raw directory | `data/raw/` |
-| Download status | succeeded |
-| JSONL parse check | succeeded |
+| Download status | 已完成 |
+| JSONL parse check | 已完成 |
+| Schema check | `session -> events[] -> aid, ts, type` |
 
-## Conclusion
+## 结论
 
-The data access path is valid. The next step is to register the full raw archive as `D000_kaggle_official_raw`, then convert raw JSONL into event-level parquet for EDA, validation, and baseline experiments.
+数据访问路径可用。下一步应将完整原始压缩包登记为 `D000_kaggle_official_raw`，再把 raw JSONL 转成事件级 parquet，用于 EDA、validation 和 baseline experiments。

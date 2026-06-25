@@ -1,5 +1,5 @@
-site_name: OTTO Recommender System Study
-site_description: A reproducible recommender-system study of the Kaggle OTTO competition.
+site_name: OTTO 推荐系统复盘
+site_description: Kaggle OTTO 推荐系统竞赛的可复现项目报告与实验工作区。
 site_url: https://ai4rec.github.io/OTTO/
 repo_url: https://github.com/AI4Rec/OTTO
 repo_name: AI4Rec/OTTO
@@ -36,14 +36,14 @@ theme:
     - content.tabs.link
 
 nav:
-  - Overview: index.md
-  - Task & Metric: task_metric.md
-  - Data & EDA: data_eda.md
-  - Validation: validation.md
-  - Methods: methods.md
-  - Experiments: experiments.md
-  - Engineering: engineering.md
-  - Project Story: project_story.md
+  - 总览: index.md
+  - 任务与指标: task_metric.md
+  - 数据与 EDA: data_eda.md
+  - 验证体系: validation.md
+  - 方法路线: methods.md
+  - 实验看板: experiments.md
+  - 工程规范: engineering.md
+  - 项目讲述: project_story.md
 
 markdown_extensions:
   - admonition

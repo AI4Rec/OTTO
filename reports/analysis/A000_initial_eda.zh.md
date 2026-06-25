@@ -1,76 +1,76 @@
-# A000 Full EDA Report
+# A000 全量 EDA 报告
 
-## Summary
+## 摘要
 
-This report records a full-dataset EDA pass for the Kaggle OTTO session dataset. It covers the complete train and test JSONL files, generates public SVG figures, and translates data observations into validation, candidate-generation, and feature-engineering hypotheses.
+本报告记录 Kaggle OTTO session 数据集的一次全量 EDA。分析覆盖完整 train/test JSONL 文件，生成公开 SVG 图表，并将数据观察转化为验证、候选召回和特征工程假设。
 
-Primary artifacts:
+主要产物：
 
-| Artifact | Path |
+| 产物 | 路径 |
 | :-- | :-- |
-| Summary JSON | `reports/eda/full_eda_summary.json` |
-| Split summary table | `reports/eda/split_summary.csv` |
-| Top-aid table | `reports/eda/top_aids_by_split.csv` |
-| Public EDA page | `site/data_eda.md` |
-| Figures | `site/assets/figures/*.svg` |
+| 摘要 JSON | `reports/eda/full_eda_summary.json` |
+| split summary 表 | `reports/eda/split_summary.csv` |
+| top-aid 表 | `reports/eda/top_aids_by_split.csv` |
+| 公开 EDA 页面 | `site/data_eda.md` |
+| 图表 | `site/assets/figures/*.svg` |
 
-## Data Scope
+## 数据范围
 
-| split | sessions | events | unique aids | time range |
+| split | sessions | events | unique aids | 时间范围 |
 | :-- | --: | --: | --: | :-- |
-| train | 12,899,779 | 216,716,096 | 1,855,603 | 2022-07-31 to 2022-08-28 UTC |
-| test | 1,671,803 | 13,851,293 | 1,019,357 | 2022-08-28 to 2022-09-04 UTC |
+| train | 12,899,779 | 216,716,096 | 1,855,603 | 2022-07-31 至 2022-08-28 UTC |
+| test | 1,671,803 | 13,851,293 | 1,019,357 | 2022-08-28 至 2022-09-04 UTC |
 
-## Field Contract
+## 字段口径
 
 ```text
 session -> events[]
 event -> aid, ts, type
 ```
 
-Recommended event-level representation:
+推荐事件级表结构：
 
 ```text
 session:int64, aid:int64, ts:int64, type:string, event_idx:int32
 ```
 
-## Core Findings
+## 核心发现
 
-| Finding | Evidence | Engineering consequence |
+| 发现 | 证据 | 工程影响 |
 | :-- | :-- | :-- |
-| Test sessions are short | Mean session length is 8.29 in test vs 16.80 in train | Segment validation and baseline metrics by session length |
-| Repeated item behavior is common | 69.20% of train sessions and 63.61% of test sessions repeat an aid | Include session-history candidates and count/recency features |
-| Orders are sparse but important | Full train order ratio is 2.35%; metric order weight is 0.60 | Build order-specific candidate sources and diagnostics |
-| Orders skew late | 54.66% of train orders and 73.75% of test orders occur in final 30% of session | Add relative-position and late-event weighting |
-| Popularity drifts | Train/test top100 item Jaccard is 0.3072 | Compare global and recent-window popularity |
-| Test items are not cold | 100% of test aids appear in train | Focus on observed item graph and co-visitation |
-| Type transitions are asymmetric | Cart-to-order transition probability is about 9-10% | Build type-aware co-visitation matrices |
+| test session 更短 | test 平均长度 8.29，train 平均长度 16.80 | 验证和基线指标应按 session length 分层 |
+| 重复 item 行为常见 | 69.20% 的 train session、63.61% 的 test session 重复出现同一 aid | 加入 session-history candidates 与 count/recency features |
+| orders 稀疏但重要 | full train order ratio 为 2.35%；metric order weight 为 0.60 | 建立 order-specific candidate sources 与 diagnostics |
+| orders 偏向后段 | train 54.66%、test 73.75% 的 orders 出现在 session 最后 30% | 加入 relative-position 与 late-event weighting |
+| 热门 item 漂移 | train/test top100 item Jaccard 为 0.3072 | 对比 global 与 recent-window popularity |
+| test item 不是冷启动 | test 中 100% 的 aids 都在 train 出现过 | 优先利用 observed item graph 与 co-visitation |
+| type transitions 不对称 | cart-to-order transition probability 约 9-10% | 构建 type-aware co-visitation matrices |
 
-## Modeling Hypotheses
+## 建模假设
 
-| Hypothesis | Planned experiment |
+| 假设 | 计划实验 |
 | :-- | :-- |
-| Type-specific popularity improves over one global fallback | `B000_popularity_baseline` |
-| Recent unique session history is a strong baseline candidate source | `B001_session_history_baseline` |
-| Chronological validation is required to measure drift-sensitive methods | `V000_time_split` |
-| Click-to-cart and cart-to-order co-visitation improve cart/order recall | `C000_covisit_baseline` |
-| Relative-position and last-event-type features improve order ranking | `F000_session_item_features` |
+| target-specific popularity 优于单一 global fallback | `B000_popularity_baseline` |
+| recent unique session history 是强 baseline candidate source | `B001_session_history_baseline` |
+| chronological validation 对 drift-sensitive 方法是必要的 | `V000_time_split` |
+| click-to-cart 与 cart-to-order co-visitation 能提升 cart/order recall | `C000_covisit_baseline` |
+| relative-position 与 last-event-type features 能提升 order ranking | `F000_session_item_features` |
 
-## Figure Inventory
+## 图表清单
 
-| Figure | Purpose |
+| 图表 | 用途 |
 | :-- | :-- |
-| `eda_session_length_hist.svg` | Compare train/test session length distribution |
-| `eda_event_type_mix.svg` | Show click/cart/order imbalance |
-| `eda_session_signals.svg` | Compare repeated-aid and cart/order session signals |
-| `eda_daily_event_volume.svg` | Show chronological structure and split boundary |
-| `eda_item_popularity_loglog.svg` | Show item popularity long tail |
-| `eda_type_transition_heatmap.svg` | Show type-to-type event transitions |
-| `eda_type_position_deciles.svg` | Show where behavior types appear inside sessions |
+| `eda_session_length_hist.svg` | 对比 train/test session length distribution |
+| `eda_event_type_mix.svg` | 展示 click/cart/order imbalance |
+| `eda_session_signals.svg` | 对比 repeated-aid 与 cart/order session signals |
+| `eda_daily_event_volume.svg` | 展示时间结构与 split boundary |
+| `eda_item_popularity_loglog.svg` | 展示 item popularity long tail |
+| `eda_type_transition_heatmap.svg` | 展示 event type transition |
+| `eda_type_position_deciles.svg` | 展示不同行为类型在 session 内的位置 |
 
-## Next Steps
+## 下一步
 
-1. Build `V000_time_split` with weighted Recall@20 sanity checks.
-2. Implement `B000_popularity_baseline` with global, recent, and target-specific variants.
-3. Implement `B001_session_history_baseline` and report metrics by session length.
-4. Build first co-visitation matrices guided by click-click, click-cart, and cart-order transitions.
+1. 构建 `V000_time_split`，并补齐 weighted Recall@20 sanity checks。
+2. 实现 `B000_popularity_baseline`，包含 global、recent、target-specific 三种变体。
+3. 实现 `B001_session_history_baseline`，并按 session length 汇报指标。
+4. 基于 click-click、click-cart、cart-order transitions 构建第一版 co-visitation matrices。

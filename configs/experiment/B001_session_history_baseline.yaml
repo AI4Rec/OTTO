@@ -1,6 +1,6 @@
 experiment_id: B001_session_history_baseline
 stage: baseline
-description: Recent unique session-history baseline with popularity fallback.
+description: recent unique session-history baseline，并使用 popularity fallback。
 data:
   dataset_id: D000_kaggle_official_raw
   split_id: V000_time_split

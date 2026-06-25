@@ -1,16 +1,16 @@
-# Task & Metric
+# 任务与指标
 
-## Task Definition
+## 任务定义
 
-The OTTO competition is a session-based recommendation task. Each input is a user session represented as an ordered list of events. Every event contains:
+OTTO 是一个 session-based recommendation 任务。每条输入是一个用户 session，session 内部是一串按时间排序的事件。每个事件包含：
 
 ```text
 aid: item id
-ts: millisecond timestamp
+ts: 毫秒级时间戳
 type: clicks | carts | orders
 ```
 
-For each test session, the system predicts up to 20 candidate items for three targets:
+对每个 test session，系统需要分别为三个目标预测最多 20 个候选商品：
 
 ```text
 <session>_clicks
@@ -18,9 +18,9 @@ For each test session, the system predicts up to 20 candidate items for three ta
 <session>_orders
 ```
 
-## Evaluation Metric
+## 评价指标
 
-The official score is weighted Recall@20:
+官方指标是 weighted Recall@20：
 
 ```text
 score = 0.10 * recall_clicks@20
@@ -28,17 +28,17 @@ score = 0.10 * recall_clicks@20
       + 0.60 * recall_orders@20
 ```
 
-The metric creates an important tension:
+这带来一个核心张力：
 
-| Target | Event frequency | Metric weight | Implication |
+| 目标 | 事件频率 | 指标权重 | 建模含义 |
 | :-- | :-- | --: | :-- |
-| clicks | high | 0.10 | Strong for session continuation and short-term interest. |
-| carts | medium | 0.30 | Often bridges browsing intent and purchase intent. |
-| orders | sparse | 0.60 | Highest impact on final score; needs target-specific treatment. |
+| clicks | 高 | 0.10 | 代表 session 延续和短期兴趣，但单项权重低。 |
+| carts | 中 | 0.30 | 连接浏览意图和购买意图，是重要过渡行为。 |
+| orders | 低 | 0.60 | 对最终分数影响最大，需要单独召回和排序。 |
 
-## System Framing
+## 系统视角
 
-The task is naturally a two-stage recommender system:
+这个任务天然适合拆成两阶段推荐系统：
 
 ```text
 Session events
@@ -48,16 +48,16 @@ Session events
   -> top-20 predictions for clicks/carts/orders
 ```
 
-## Design Consequences
+## 设计约束
 
-- The validation split must respect time order.
-- Candidate generation is critical because only 20 items per target can be submitted.
-- Recent session behavior is a strong baseline signal.
-- Orders should not be treated as a small side effect of click prediction.
-- Separate target heads or target-specific candidate mixes are likely useful.
+- 验证集切分必须尊重时间顺序。
+- 每个 target 最多只能提交 20 个 item，候选召回质量非常关键。
+- 最近 session 行为是强基线信号。
+- orders 不能被当作 clicks 预测的附属结果处理。
+- 候选池和排序头应尽量按 `clicks`、`carts`、`orders` 分目标设计。
 
-## References
+## 资料来源
 
-- Kaggle competition: `otto-recommender-system`
-- Kaggle dataset: `otto/recsys-dataset`
-- OTTO RecSys Challenge public dataset repository
+- Kaggle competition：`otto-recommender-system`
+- Kaggle dataset：`otto/recsys-dataset`
+- OTTO RecSys Challenge 公开数据说明

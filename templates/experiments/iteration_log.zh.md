@@ -1,5 +1,5 @@
-# Experiment Iteration Log
+# 迭代日志
 
-| Date | Experiment | Change | Main metric | Decision | Follow-up |
-| :-- | :-- | :-- | --: | :-- | :-- |
+| 日期 | 实验 ID | 改动 | 结果 | 决策 | 下一步 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
 |  |  |  |  |  |  |

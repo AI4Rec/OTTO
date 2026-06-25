@@ -1,66 +1,66 @@
-# Validation
+# 验证体系
 
-## Goal
+## 目标
 
-The validation design should simulate the competition setting: given a session prefix, predict future clicks, carts, and orders. A random split is not suitable because OTTO is time-sensitive and train/test are sequential.
+本地验证要模拟比赛设定：给定 session 前缀，预测未来的 `clicks`、`carts`、`orders`。OTTO 具有明显时间结构，train/test 又是前后相邻的时间窗口，因此随机切分不适合作为主验证方案。
 
-## Proposed Split
+## 切分方案
 
 ```text
 raw train sessions
-  -> sort/filter by timestamp
-  -> choose a recent validation window
-  -> split each selected session into input prefix and future labels
-  -> evaluate top-20 predictions for clicks/carts/orders
+  -> 按时间排序或筛选
+  -> 选择最近一段作为 validation window
+  -> 将每个 session 切成 input prefix 与 future labels
+  -> 评估 clicks/carts/orders 的 top-20 预测
 ```
 
-EDA motivation:
+EDA 支持这个设计：
 
-- Train and test are chronological neighbors.
-- Full train covers 2022-07-31 to 2022-08-28; test covers 2022-08-28 to 2022-09-04.
-- Top popularity drifts across the boundary: train/test top100 item Jaccard is 0.3072.
-- Random splitting would mix popularity regimes and overstate generalization.
+- train 与 test 是时间相邻窗口。
+- full train 覆盖 2022-07-31 至 2022-08-28；test 覆盖 2022-08-28 至 2022-09-04。
+- train/test top100 item Jaccard 只有 0.3072，说明热门 item 会漂移。
+- 随机切分会混合未来热度，容易高估泛化能力。
 
-## Validation Artifacts
+## 验证产物
 
-| Artifact | Description | Status |
+| 产物 | 说明 | 状态 |
 | :-- | :-- | :-- |
-| `V000_time_split` | Time-based split definition | planned |
-| `labels.parquet` | Future target items grouped by session and target | planned |
-| `valid_input.parquet` | Truncated session events used as model input | planned |
-| `metric.py` | Weighted Recall@20 implementation | planned |
-| `metric_sanity.md` | Small hand-checked metric cases | planned |
+| `V000_time_split` | 按时间切分的验证集定义 | 计划中 |
+| `labels.parquet` | 按 session 和 target 聚合的未来标签 | 计划中 |
+| `valid_input.parquet` | 截断后的 session 输入事件 | 计划中 |
+| `metric.py` | weighted Recall@20 实现 | 计划中 |
+| `metric_sanity.md` | 手工可检查的指标样例 | 计划中 |
 
-## Metric Contract
+## 指标口径
 
-For each target:
+单个 target：
 
 ```text
 recall@20 = hits(predicted_top_20, true_items) / min(20, number_of_true_items)
 ```
 
-Final score:
+最终分数：
 
 ```text
 0.10 * clicks + 0.30 * carts + 0.60 * orders
 ```
 
-## Leakage Checks
+## 泄漏检查
 
-| Risk | Check |
+| 风险 | 检查方式 |
 | :-- | :-- |
-| Future events included in input | Ensure all input timestamps are before label timestamps. |
-| Random session splitting | Use chronological split as the default validation protocol. |
-| Test labels assumed | Never derive labels from the public test split. |
-| Duplicate predictions | Deduplicate candidates before metric computation. |
-| Target leakage across types | Evaluate clicks, carts, and orders separately. |
+| input 中混入未来事件 | 确保所有 input timestamp 都早于 label timestamp。 |
+| 随机切分 session | 默认只使用时间切分协议。 |
+| 假设 test label | 不从公开 test split 中推导标签。 |
+| 重复预测 | 指标计算前对候选 item 去重。 |
+| target 间泄漏 | `clicks`、`carts`、`orders` 分开评估。 |
 
-## Required Diagnostics
+## 必要诊断
 
-| Diagnostic | Why it matters |
+| 诊断 | 作用 |
 | :-- | :-- |
-| Metric sanity examples | Prevents silent weighted Recall@20 implementation errors. |
-| Score by session length bucket | Test is much shorter than train. |
-| Score by target | Orders dominate the metric but are sparse. |
-| Candidate recall before ranking | Separates retrieval bottlenecks from ranking bottlenecks. |
-| Recent vs global popularity comparison | Popular items drift over time. |
+| 指标手工样例 | 防止 weighted Recall@20 实现静默出错。 |
+| 按 session 长度分桶得分 | test session 显著短于 train。 |
+| 按 target 分解得分 | orders 稀疏但权重最高。 |
+| ranking 前的 candidate recall | 区分召回瓶颈和排序瓶颈。 |
+| recent popularity vs global popularity | 衡量热门 item 漂移影响。 |

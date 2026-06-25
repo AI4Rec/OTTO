@@ -1,6 +1,6 @@
 experiment_id: E000_smoke_download
 stage: data_access
-description: Verify Kaggle dataset access and raw JSONL readability.
+description: 检查 Kaggle dataset 访问与 raw JSONL 可读性。
 data:
   source: kaggle:otto/recsys-dataset
   sample_file: otto-recsys-test.jsonl

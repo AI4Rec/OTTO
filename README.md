@@ -1,52 +1,50 @@
-# OTTO Recommender System Study
+# OTTO 推荐系统复盘
 
-This repository is a reproducible recommender-system study of the Kaggle OTTO competition. It is designed as both a public project report and an experiment-iteration workspace.
+本仓库是 Kaggle OTTO 推荐系统竞赛的可复现复盘项目。目标不是追逐已经结束的榜单名次，而是把一个会话推荐任务拆成成熟项目应有的形态：任务定义、指标理解、全量 EDA、验证体系、基线、候选召回、特征与排序、实验迭代记录、最终项目讲述。
 
-The goal is to build the project like a mature recommendation case study: define the task and metric, inspect the full data schema, build EDA tables and visualizations, design validation, implement baselines, iterate on candidate generation and ranking, and record each experiment with clear evidence.
+仓库同时承担两件事：
 
-## What This Project Should Demonstrate
-
-| Area | Public artifact | Engineering artifact |
+| 模块 | 项目报告产物 | 工程产物 |
 | :-- | :-- | :-- |
-| Task understanding | Metric and business framing in `site/task_metric.md` | Metric implementation plan |
-| Data understanding | Field contract, distribution tables, EDA insights in `site/data_eda.md` | Raw-to-parquet and validation data pipeline |
-| Validation | Time split design in `site/validation.md` | Split, label, and weighted Recall@20 code |
-| Modeling | Baseline, co-visitation, and ranking roadmap in `site/methods.md` | Config-driven experiment runs |
-| Experiment tracking | Experiment board in `site/experiments.md` | `configs/`, `experiments/`, `registry/` |
-| Reproducibility | Engineering notes in `site/engineering.md` | Release guard and public-safe repository layout |
+| 任务理解 | `site/task_metric.md` 中的任务与指标说明 | 指标实现与检查用例 |
+| 数据理解 | `site/data_eda.md` 中的字段口径、分布图、洞察 | 原始数据到事件表、验证集的数据管线 |
+| 验证体系 | `site/validation.md` 中的时间切分与泄漏检查 | split、label、weighted Recall@20 代码 |
+| 方法路线 | `site/methods.md` 中的基线、共现召回、排序路线 | 配置驱动的实验运行 |
+| 实验管理 | `site/experiments.md` 中的实验看板 | `configs/`、`experiments/`、`registry/` |
+| 可复现性 | `site/engineering.md` 中的工程规范 | 发布检查与公开仓库结构 |
 
-## Current Status
+## 当前状态
 
-The repository currently contains the public project skeleton and the first EDA report. The next implementation milestone is a minimum reproducible baseline:
+当前仓库已经包含公开项目骨架和第一版全量 EDA 报告。下一阶段的最小闭环是：
 
-1. Convert raw JSONL into event-level parquet.
-2. Build a time-based validation split and labels.
-3. Implement popularity and session-history baselines.
-4. Record results in an experiment card and update the experiment board.
+1. 将原始 JSONL 转成事件级 parquet。
+2. 构建按时间切分的本地验证集和标签。
+3. 实现 popularity 与 session history 两个基线。
+4. 把指标、结论和后续动作写入实验卡片，并同步更新实验看板。
 
-## Repository Layout
+## 目录结构
 
 ```text
-configs/      Versioned experiment and pipeline configs
-docs/         Public background notes and workflow standards
-experiments/  Experiment cards with design, commands, metrics, and conclusions
-registry/     Dataset, experiment, feature, and submission indexes
-reports/      Detailed analysis reports and generated figures
-site/         MkDocs knowledge base source
-src/          Reusable project code
-templates/    Report and experiment templates
-scripts/      Release checks and utility scripts
+configs/      实验与数据管线配置
+docs/         公开背景资料与工程规范
+experiments/  实验卡片：设计、命令、指标、结论
+registry/     数据集、实验、特征、提交索引
+reports/      深入分析报告与生成图表
+site/         MkDocs 知识库源码
+src/          可复用项目代码
+templates/    报告与实验模板
+scripts/      发布检查与工具脚本
 ```
 
-## Data
+## 数据
 
-The raw OTTO dataset is not committed. Download it from Kaggle:
+OTTO 原始数据不进入仓库，需要从 Kaggle 下载：
 
 ```bash
 kaggle datasets download -d otto/recsys-dataset -p data/raw
 ```
 
-Recommended local layout:
+建议本地数据目录：
 
 ```text
 data/raw/
@@ -56,23 +54,23 @@ data/labels/
 outputs/
 ```
 
-Large data files, model artifacts, local environments, logs, and secrets are excluded from git.
+大数据文件、模型产物、本地环境、日志和密钥文件都不应提交。
 
-## Documentation
+## 文档站点
 
-Build the public knowledge base:
+构建知识库：
 
 ```bash
 mkdocs build --strict
 ```
 
-Preview locally:
+本地预览：
 
 ```bash
 mkdocs serve
 ```
 
-Run the public-release guard before pushing:
+发布前运行公开内容检查：
 
 ```bash
 bash scripts/check_public_release.sh

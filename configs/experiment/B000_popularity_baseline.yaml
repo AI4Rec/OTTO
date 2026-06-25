@@ -1,6 +1,6 @@
 experiment_id: B000_popularity_baseline
 stage: baseline
-description: Global and target-specific popularity baseline.
+description: 全局与 target-specific popularity baseline。
 data:
   dataset_id: D000_kaggle_official_raw
   split_id: V000_time_split

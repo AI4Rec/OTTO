@@ -1,15 +1,15 @@
-# Experiment Versioning Standard
+# 实验版本规范
 
-## Goal
+## 目标
 
-Every formal experiment should be traceable from four pieces of information:
+每个正式实验都应能从四类信息追溯：
 
-1. Code version.
-2. Dataset and split version.
-3. Config file.
-4. Metrics, artifacts, and conclusion.
+1. 代码版本。
+2. 数据集与 split 版本。
+3. 配置文件。
+4. 指标、产物和结论。
 
-## Repository Structure
+## 仓库结构
 
 ```text
 configs/
@@ -23,7 +23,7 @@ reports/
 src/
 ```
 
-Local generated files should follow this layout and remain outside git:
+本地生成文件遵循以下结构，并保持在 git 之外：
 
 ```text
 data/raw/
@@ -35,20 +35,20 @@ outputs/submissions/
 logs/
 ```
 
-## Experiment ID Rules
+## 实验 ID 规则
 
-| Prefix | Meaning |
+| 前缀 | 含义 |
 | :-- | :-- |
-| `D000_*` | Dataset version or derived data artifact |
-| `A000_*` | Analysis and EDA |
-| `V000_*` | Validation split and metric |
-| `B000_*` | Baseline |
-| `C000_*` | Candidate generation and recall |
-| `F000_*` | Features |
-| `R000_*` | Ranking |
-| `S000_*` | Submission |
+| `D000_*` | dataset version 或 derived data artifact |
+| `A000_*` | analysis 与 EDA |
+| `V000_*` | validation split 与 metric |
+| `B000_*` | baseline |
+| `C000_*` | candidate generation 与 recall |
+| `F000_*` | features |
+| `R000_*` | ranking |
+| `S000_*` | submission |
 
-Examples:
+示例：
 
 ```text
 V000_time_split
@@ -58,9 +58,9 @@ C000_covisit_baseline
 R000_lgbm_ranker
 ```
 
-## Required Files
+## 必需文件
 
-Every formal experiment should have:
+每个正式实验应包含：
 
 ```text
 configs/experiment/<EXPERIMENT_ID>.yaml
@@ -69,38 +69,38 @@ registry/experiments.tsv entry
 outputs/experiments/<EXPERIMENT_ID>/ local run directory
 ```
 
-## Config Requirements
+## 配置要求
 
-Config files should include:
+配置文件应包含：
 
-- Experiment ID.
-- Dataset version.
-- Split version.
-- Input artifact paths.
-- Method parameters.
-- Random seed when applicable.
-- Output directory.
-- Metrics to compute.
+- Experiment ID。
+- Dataset version。
+- Split version。
+- 输入产物路径。
+- 方法参数。
+- 需要时记录 random seed。
+- 输出目录。
+- 需要计算的指标。
 
-Config files must not contain credentials, private machine details, or absolute infrastructure paths.
+配置文件不得包含凭证、私有机器信息或基础设施绝对路径。
 
-## Experiment Card Requirements
+## 实验卡片要求
 
-Each experiment card should record:
+每张实验卡片应记录：
 
-- Hypothesis.
-- Method design.
-- Inputs and config.
-- Exact command.
-- Output artifacts.
-- Metrics.
-- Diagnostics.
-- Decision.
-- Follow-up.
+- 假设。
+- 方法设计。
+- 输入与配置。
+- 精确命令。
+- 输出产物。
+- 指标。
+- 诊断。
+- 决策。
+- 后续动作。
 
-## Registry Fields
+## Registry 字段
 
-`registry/experiments.tsv` should contain:
+`registry/experiments.tsv` 应包含：
 
 ```text
 experiment_id
@@ -114,4 +114,4 @@ created_at
 notes
 ```
 
-The registry is an index, not a replacement for the experiment card.
+registry 是索引，不替代实验卡片。
